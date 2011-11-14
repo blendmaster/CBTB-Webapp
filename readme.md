@@ -1,0 +1,3 @@
+﻿# Beware, Traveller!
+
+For this repository holds none other than [assignments 11 - 15](http://mcs.mines.edu/Courses/csci445/ASSIGN/CBTB_1.html) for [CSCI 445 (Web Programming)](http://mcs.mines.edu/Courses/csci445/index.html). Those who have beheld its contents have changed—perhaps imperceptibly, yet irrevocably so. Were they broken, immured by the memory of that which mortals cannot possibly comprehend? Or were they freed—from a world without beauty, elegance, or compassion? This I cannot say, dear traveller. I am but a gatekeeper; an anchor to which this respository is grounded. It is you who must choose to enter, and confront what lies within.
