@@ -2,6 +2,7 @@ Books
 	ISBN
 	Title
 	Author
+	DonationID
 
 User
 	Name
