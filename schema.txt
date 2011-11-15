@@ -1,0 +1,20 @@
+Books
+	ISBN
+	Title
+	Author
+
+User
+	Name
+	Username
+	Role
+	Email
+	
+Donation
+	DonationID
+	Username
+	Cause
+	Location
+	
+Donated Books
+	DonationID  (when someone makes a donation of multiple books, the donated books would have several rows of the same DonationID, but(probably) different ISBNs)
+	ISBN
