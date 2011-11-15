@@ -24,7 +24,41 @@
 
 	</header>
 	<div id="main" role="main">
-		
+    <form>
+      <table>
+        <tr>
+          <th></th>
+          <th>Username</th>
+          <th>Role</th>
+        </tr>
+        <tr>
+          <td><input type="checkbox" value="userAlpha"/></td>
+          <td>Alpha</td>
+          <td>Super Administrator</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" value="userBeta"/></td>
+          <td>Beta</td>
+          <td>Chapter Administrator</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" value="userGamma"/></td>
+          <td>Gamma</td>
+          <td>Project Administrator</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" value="userDelta"/></td>
+          <td>Delta</td>
+          <td>User</td>
+        </tr>
+      </table>
+      <label for="changeRole">Change the selected user(s) role to:</label><select name="changeRole" id="changeRole">
+      	<option value="superAdmin">Super Administrator</option>
+        <option value="chapterAdmin">Chapter Administrator</option>
+        <option value="projectAdmin">Project Administrator</option>
+        <option value="user">User</option>
+      </select>
+    </form>
 	</div>
 	<footer>
 
