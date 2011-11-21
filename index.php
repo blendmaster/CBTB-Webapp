@@ -23,7 +23,7 @@
 	<header>
 
 	</header>
-	<div id="main" role="main">
+	<nav>
 		<ul>
 			<li><a href="register.html">Registration</a></li>
 			<li><a href="dashboard.html">User Dashboard</a></li>
@@ -33,6 +33,13 @@
 			<li><a href="adddonation.html">Add Donation</a></li>
 			<li><a href="books.html">Book Inventory</a></li>
 		</ul>
+	</nav>
+	<div id="main" role="main">
+		<form action="login.php">
+			<p><label for="username">username: </label><input type="text" id='username' name='username' /></p>
+			<p><label for="pasword">password: </label><input type="password" id='password' name='password' /></p>
+			<p><input type="submit"/></p>
+		</form>
 	</div>
 	<footer>
 
