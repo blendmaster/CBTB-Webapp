@@ -25,13 +25,13 @@
 	</header>
 	<nav>
 		<ul>
-			<li><a href="register.html">Registration</a></li>
-			<li><a href="dashboard.html">User Dashboard</a></li>
-			<li><a href="useradmin.html">User Priveleges Management</a></li>
-			<li><a href="addbook.html">Add Books</a></li>
-			<li><a href="adddonor.html">Add Donors</a></li>
-			<li><a href="adddonation.html">Add Donation</a></li>
-			<li><a href="books.html">Book Inventory</a></li>
+			<li><a href="register.php">Registration</a></li>
+			<li><a href="dashboard.php">User Dashboard</a></li>
+			<li><a href="useradmin.php">User Priveleges Management</a></li>
+			<li><a href="addbook.php">Add Books</a></li>
+			<li><a href="adddonor.php">Add Donors</a></li>
+			<li><a href="adddonation.php">Add Donation</a></li>
+			<li><a href="books.php">Book Inventory</a></li>
 		</ul>
 	</nav>
 	<div id="main" role="main">
