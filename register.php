@@ -93,14 +93,16 @@
 						</td>
 						<td>
 							<select name="organization" id="organization">
-								<?php if( $dbh = open_db() ) {
-									$organizations = $dbh->query('select * from organizations');
-									while( $organization = $organizations->fetch() ) {
-										printf( "<option value='%i' %s>%s</option>", 
-										$organization['id'], 
-										isset( $_POST['organization'] ) && $_POST['organization'] == $organization['id'] ? "selected" : "",
-										$organization['name']);
-									}
+								<?php 
+									if( $dbh = open_db() ):
+										$organizations = $dbh->query('select * from organizations');
+										while( $organization = $organizations->fetch() ):
+											printf( "<option value='%i' %s>%s</option>", 
+											$organization['id'], 
+											isset( $_POST['organization'] ) && $_POST['organization'] == $organization['id'] ? "selected" : "",
+											$organization['name']);
+										endwhile;
+									endif;
 								?>
 							</select>
 						</td>
