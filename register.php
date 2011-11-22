@@ -25,28 +25,53 @@
 	</header>
 	<div id="main" role="main">
 		<form>
-			<p>
-				<label for="username">Username</label><input type="text" name="username" id="username" />
-			</p>
-			<p>
-				<label for="email">Email</label><input type="email" name="email" id="email" />
-			</p>
-			<p>
-				<label for="password">Password</label><input type="password" name="password" id="password" />
-			</p>
-			<p>
-				<label for="confirmPassword">Password Confirm</label><input type="password" name="confirmPassword" id="confirmPassword" />
-			</p>
-			<p>
-				<label for="organization">Organization</label>
-				<select name="organization" id="organization">
-					<option value="organizationAlpha">Organization Alpha</option>
-					<option value="organizationOmega">Organization Omega</option>\
-				</select>
-			</p>
-			<p>
-				<input type="Submit" value="Create Account" />
-			</p>
+			<fieldset>
+				<legend>Account Details</legend>
+				<table>	
+					<tr>
+						<td>
+							<label for="username">Username:&nbsp;</label>
+						</td>
+						<td>
+							<input type="text" name="username" id="username" placeholder='Desired Username' required autofocus />
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							<label for="password">Password:&nbsp;</label>
+						</td>
+						<td>
+							<input type="password" name="password" id="password" required />
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							<label for="email">Email:&nbsp;</label>
+						</td>
+						<td>
+							<input type="email" name="email" id="email" placeholder='Email Address' required />
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							<label for="organization">Organization:&nbsp; </label>
+						</td>
+						<td>
+							<select name="organization" id="organization">
+								<option value="organizationAlpha">Organization Alpha</option>
+								<option value="organizationOmega">Organization Omega</option>
+							</select>
+						</td>
+					</tr>
+
+				</table>
+				<p>
+					<input type="Submit" value="Create Account" />
+				</p>
+			</fieldset>
 		</form>
 	</div>
 	<footer>
@@ -54,12 +79,19 @@
 	</footer>
 </div> <!--! end of #container -->
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
 
 <!-- scripts concatenated and minified via ant build script-->
 <script src="js/plugins.js"></script>
 <script src="js/script.js"></script>
+<script src="js/libs/webshim/polyfiller.js"></script>
+<script>
+//thank you based polyfill
+if(!Modernizr.input.placeholder || !Modernizr.input.autofocus || !Modernizr.inputtypes.email ){
+	$.webshims.polyfill('forms');
+}
+</script>
 <!-- end scripts-->
 
 
