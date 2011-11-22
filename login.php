@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
@@ -16,6 +17,12 @@
 	<link rel="stylesheet" href="css/style.css">
 
 	<script src="js/libs/modernizr-2.0.6.min.js"></script>
+	
+	<?php
+		if($_POST['']) {
+			
+		}
+	?>
 </head>
 <body>
 
