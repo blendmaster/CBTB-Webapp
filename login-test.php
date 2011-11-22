@@ -6,7 +6,7 @@
 	
 	if ($dbh = open_db() ) {
 		try { 
-			$users = $dbh->prepare('SELECT (username, password) FROM users WHERE username = :username');
+			$users = $dbh->prepare('select username, password from users where username = :username');
 			$users->execute(array(":username" => $myusername));
 			
 			if($user = $sth->fetch()) {
