@@ -22,7 +22,7 @@
 <div id="container">
 	<header>
 	</header>
-	<h1>Welcome!</h1>
+	<h1>Welcome <?php echo $_SESSION['username']; ?>!</h1>
 	<div id="main" role="main">
 		<li><a href="books.html">Book Inventory</a>
 		<a href="summary.html">See Summary</a>
@@ -36,6 +36,16 @@
 			<li>You have raised $ for your cause(s)</li>
 			<li>You have unfulfilled orders</li>
 		</ul>
+		
+		<p> Summary for <?php echo $_SESSION['username']; ?>:
+		<table border = "1">
+			<tr>
+			  <td>Books Collected</td><td>Sold Books</td><td>Recycled Books</td><td>$ raised</td>
+			</tr>
+			<tr>
+			  <td>$0</td><td>$0</td><td>$0</td><td>$0</td>
+			</tr>
+	  </table>
 		
 	</div>
 	<footer>

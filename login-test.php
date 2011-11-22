@@ -1,4 +1,13 @@
 <?php session_start(); ?>
+<html>
+<head>
+  <script type="text/javascript">
+    function redirecter(){
+        window.location = "../javascriptredirect.php"
+    }
+  </script>
+</head>
+<body>
 <?php
 	include "includes/db.inc.php";
 
@@ -14,9 +23,7 @@
 				if( $user['password'] == sha1($mypassword) ) {
 					printf( "<p>Login for user %s successful</p>", $myusername);
 					$_SESSION['username'] = $_POST['username'];
-					?><script type="text/javascript">
-            window.location = "login.php"
-          </script><?php
+					?><a href="dashboard.php" onLoad="setTimeout('redirecter()', 5000)">Login successful, being redirected...</a><?php
 				} else {
 					printf( "<p>Incorrect password for user %s </p>", $myusername );
 				}
@@ -30,3 +37,5 @@
 		echo "<p>Error connecting to db</p>";
 	}
 ?>
+</body>
+</html?

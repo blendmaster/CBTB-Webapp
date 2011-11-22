@@ -42,15 +42,23 @@
 			<li><a href="logout.php">Logout</a></li>
 		</ul>
 		</br>
-		<p> Summary for <?php echo $_SESSION['username']; ?>:
+		<h2>General Summary for <?php echo $_SESSION['username']; ?></h2>
+		<ul>
+			<li>You have collected books</li>
+			<li>You have sold books</li>
+			<li>You have recycled books</li>
+			<li>You have raised $ for your cause(s)</li>
+			<li>You have unfulfilled orders</li>
+		</ul>
+		<h2>Alternative Listing for <?php echo $_SESSION['username']; ?></h2>
 		<table border = "1">
 			<tr>
-			<td>User</td><td>Books Collected</td><td>Sold Books</td><td>Recycled Books</td><td>$ raised</td>
+			  <td>User</td><td>Books Collected</td><td>Sold Books</td><td>Recycled Books</td><td>$ raised</td>
 			</tr>
 			<tr>
-			<td><?php echo $_SESSION['username']; ?></td><td>$0</td><td>$0</td><td>$0</td><td>$0</td>
+			  <td><?php echo $_SESSION['username']; ?></td><td>$0</td><td>$0</td><td>$0</td><td>$0</td>
 			</tr>
-			</table>
+	  </table>
 	</div>
 	<footer>
 

@@ -37,7 +37,7 @@
 		</ul>
 	</nav>
 	<div id="main" role="main">
-		<form action="login-test.php" method="post">
+		<form action="login.php" method="post">
 			<h2>Login</h2>
 			<input type="text" id='username' name='username' placeholder='username' />
 			<input type="password" id='password' name='password' placeholder='password' />
