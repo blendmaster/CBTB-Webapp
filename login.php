@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php
+  session_start();
+  if(!session_is_registered(myusername)){
+    header("location:index.php");
+  }
+?>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
@@ -18,9 +23,25 @@
 
 	<script src="js/libs/modernizr-2.0.6.min.js"></script>
 	
+	<?
+		include "includes/db.inc.php";
+
+		
+	?>
+
 	<?php
-		if($_POST['']) {
-			
+		if($_POST['username']) {
+		  $query = "select username from users where username = " . $_POST['username'];
+		  $result = $db->query($query);
+		  if($_POST['password']) {
+        if($_POST['password'] == $row[0]['password']) {
+        
+        } else {
+          echo "Wrong password";
+        }
+		  } else {
+  		  echo "No password";
+  		}
 		}
 	?>
 </head>
