@@ -39,10 +39,10 @@
 				echo "<p>Please enter a valid organization</p>";
 			} elseif ($dbh = open_db() ) {
 				try{ 
-					$stmt = $dbh->prepare("insert into users (username, password, email, organization) values (:username, :password, :email, :organization");
+					$stmt = $dbh->prepare("insert into users (username, password, email, organization) values (:username, :password, :email, :organization)");
 				
 					$stmt->execute(array( ":username" => $_POST['username'],
-										  ":password" => $_POST['password'],
+										  ":password" => sha1($_POST['password']),
 										  ":email" => $_POST['email'],
 										  ":organization" => $_POST['organization']));
 					echo "<p>User successfully created.</p>";
@@ -65,7 +65,7 @@
 							<label for="username">Username:&nbsp;</label>
 						</td>
 						<td>
-							<input type="text" name="username" id="username" placeholder='Desired Username' required autofocus />
+							<input type="text" name="username" id="username" placeholder='Desired Username' required autofocus maxlength='25' <?php if( isset($_POST['username'] ) { printf( "value='%s'", $_POST['username']); } ?> />
 						</td>
 					</tr>
 					
@@ -74,7 +74,7 @@
 							<label for="password">Password:&nbsp;</label>
 						</td>
 						<td>
-							<input type="password" name="password" id="password" placeholder="New Password" required />
+							<input type="password" name="password" id="password" placeholder="New Password" required <?php if( isset($_POST['password'] ) { printf( "value='%s'", $_POST['password']); } ?> />
 						</td>
 					</tr>
 					
@@ -83,7 +83,7 @@
 							<label for="email">Email:&nbsp;</label>
 						</td>
 						<td>
-							<input type="email" name="email" id="email" placeholder='Email Address' required />
+							<input type="email" name="email" id="email" placeholder='Email Address' required maxlength='255' <?php if( isset($_POST['email'] ) { printf( "value='%s'", $_POST['email']); } ?>/>
 						</td>
 					</tr>
 					
