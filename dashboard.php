@@ -1,3 +1,9 @@
+<?php
+  session_start();
+  if(!$_SESSION['username']){
+    header("location:index.php");
+  }
+?>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
@@ -7,7 +13,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-	<title>Compassion by the Book -- Dashboard</title>
+	<title>Compassion by the Book -- Book Inventory</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
 
@@ -16,19 +22,27 @@
 	<link rel="stylesheet" href="css/style.css">
 
 	<script src="js/libs/modernizr-2.0.6.min.js"></script>
+	
 </head>
 <body>
 
 <div id="container">
 	<header>
+	<p> Welcome back <?php echo $_SESSION['username']; ?></p>
 	</header>
-	<h1>Welcome <?php echo $_SESSION['username']; ?>!</h1>
 	<div id="main" role="main">
-		<li><a href="books.html">Book Inventory</a>
-		<a href="summary.html">See Summary</a>
-		<a href="addBook.html">Add New Books</a>
-		<a href="summary.html">Fill orders</a>
-		<h2>General Summary</h2>
+		<ul>
+			<li><a href="register.html">Registration</a></li>
+			<li><a href="dashboard.html">User Dashboard</a></li>
+			<li><a href="useradmin.html">User Priveleges Management</a></li>
+			<li><a href="addbook.html">Add Books</a></li>
+			<li><a href="adddonor.html">Add Donors</a></li>
+			<li><a href="adddonation.html">Add Donation</a></li>
+			<li><a href="books.html">Book Inventory</a></li>
+			<li><a href="logout.php">Logout</a></li>
+		</ul>
+		</br>
+		<h2>General Summary for <?php echo $_SESSION['username']; ?></h2>
 		<ul>
 			<li>You have collected books</li>
 			<li>You have sold books</li>
@@ -36,22 +50,20 @@
 			<li>You have raised $ for your cause(s)</li>
 			<li>You have unfulfilled orders</li>
 		</ul>
-		
-		<p> Summary for <?php echo $_SESSION['username']; ?>:
+		<h2>Alternative Listing for <?php echo $_SESSION['username']; ?></h2>
 		<table border = "1">
 			<tr>
-			  <td>Books Collected</td><td>Sold Books</td><td>Recycled Books</td><td>$ raised</td>
+			  <td>User</td><td>Books Collected</td><td>Sold Books</td><td>Recycled Books</td><td>$ raised</td>
 			</tr>
 			<tr>
-			  <td>$0</td><td>$0</td><td>$0</td><td>$0</td>
+			  <td><?php echo $_SESSION['username']; ?></td><td>$0</td><td>$0</td><td>$0</td><td>$0</td>
 			</tr>
 	  </table>
-		
 	</div>
 	<footer>
 
 	</footer>
-</div> <!--! end of #container -->
+</div> <!--! end of #container --> 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
