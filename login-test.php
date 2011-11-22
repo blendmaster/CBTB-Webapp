@@ -9,7 +9,7 @@
 
     if ($dbh = open_db() ) {
 			try { 
-				$sth = $dbh->prepare("SELECT (username, password) FROM users WHERE username ='$myusername' and password='$mypassword'");
+				$sth = $dbh->prepare("SELECT (username, password) FROM users WHERE username ='$myusername' and password='sha1($mypassword)'");
 			
 				$sth->setFetchMode(PDO::FETCH_OBJ);
 				
