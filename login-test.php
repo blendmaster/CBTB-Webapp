@@ -6,6 +6,7 @@
 
   $myusername = stripslashes($myusername);
   $mypassword = sha1(stripslashes($mypassword));
+  echo $myusername;
   echo $mypassword;
 
     if ($dbh = open_db() ) {
