@@ -16,7 +16,10 @@
 			
 				$sth->setFetchMode(PDO::FETCH_OBJ);
 				
+				var_dump($sth);
+				
 				if($row = $sth->fetch()) {
+				  echo "true";
   				session_register("myusername");
           session_register("mypassword");
           header("location:login.php");
