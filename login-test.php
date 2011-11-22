@@ -1,35 +1,30 @@
 <?php
-  include "includes/db.inc.php";
+	include "includes/db.inc.php";
 
-  $myusername=$_POST['username'];
-  $mypassword=$_POST['password'];
-
-  $myusername = stripslashes($myusername);
-  $mypassword = sha1(stripslashes($mypassword));
-  echo $myusername;
-  echo $mypassword;
-
-    if ($dbh = open_db() ) {
-			try { 
-			  $query = 'SELECT (username, password) FROM users WHERE username = ' . $myusername . ' and password = ' . $mypassword;
-				$sth = $dbh->prepare($query);
+	$username = $_POST['username'];
+	$password = $_POST['password'];
+	
+	if ($dbh = open_db() ) {
+		try { 
+			$users = $dbh->prepare('SELECT (username, password) FROM users WHERE username = :username');
+			$users->execute(array(":username" => $username));
 			
-				$sth->setFetchMode(PDO::FETCH_OBJ);
-				
-				var_dump($sth);
-				
-				if($row = $sth->fetch()) {
-				  echo "true";
-  				session_register("myusername");
-          session_register("mypassword");
-          header("location:login.php");
-  		  } else {
-  		    echo "Wrong username or password";
-  		  }
-			} catch (PDOException $e) {
-				echo 'Connection failed: ' . $e->getMessage();
-			}	
-		} else {
-			echo "<p>Error connecting to db</p>";
-		}
+			if($user = $sth->fetch()) {
+				if( $user['password'] == sha1($password) ) {
+					printf( "<p>Login for user %s successful</p>", $username);
+					session_register("username");
+					session_register("password");
+					#header("location:login.php");
+				} else {
+					printf( "<p>Incorrect password for user %s </p>", $username );
+				}
+			} else {
+				printf( "<p>user %s doesn't exist</p>", $username);
+			}
+		} catch (PDOException $e) {
+			echo 'Connection failed: ' . $e->getMessage();
+		}	
+	} else {
+		echo "<p>Error connecting to db</p>";
+	}
 ?>
