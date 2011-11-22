@@ -18,6 +18,9 @@
 #block git access
 RedirectMatch 404 /\\.git(/.*|$)
 
+#block include access
+RedirectMatch 404 /\\includes(/.*|$)
+
 # ----------------------------------------------------------------------
 # Better website experience for IE users
 # ----------------------------------------------------------------------
