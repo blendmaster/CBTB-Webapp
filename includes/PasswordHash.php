@@ -252,13 +252,15 @@ class PasswordHash {
 
 # helper functions
 function password_hash($password) {
-	$hash = (new PasswordHash(8,false))->HashPassword($password);
+	$hasher = new PasswordHash(8,false);
+	$hash = $hasher->HashPassword($password);
 	if( strlen($hash) < 20 ) die( "password couldn't be hashed!" );
 	return $hash;
 }
 
 function password_check($password, $hash) {
-	return (new PasswordHash(8,false))->CheckPassword($password,$hash);
+	$hasher = new PasswordHash(8,false);
+	return $hasher->CheckPassword($password,$hash);
 }
 
 
