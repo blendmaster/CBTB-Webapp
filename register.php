@@ -4,41 +4,30 @@
 <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
+	<?php include "includes/headmatter.inc.php" ?>
 	<title>Compassion by the Book -- Register</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
-
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/formalize.css">
-	
-	<script src="js/libs/modernizr-2.0.6.min.js"></script>
 </head>
 <body>
 
 <div id="container">
-	<header>
-
-	</header>
-	
+	<?php include "includes/header.inc.php" ?>
 	<div id="main" role="main">
 		<?php 
 		include "includes/db.inc.php";
 		include "includes/PasswordHash.php";
 		$user_created = false;
+		$error = false;
 		if( count($_POST) > 0 ) {
 			if( !isset($_POST['username']) || !preg_match( '/^\w+$/', $_POST['username'] ) ) {
-				echo "<p>Your username cannot contain spaces or special characters</p>";
+				$error = "Your username cannot contain spaces or special characters";
 			} elseif( !isset($_POST['password']) || strlen( $_POST['password'] ) < 6 || strlen( $_POST['password'] ) > 72) {
-				echo "<p>Please create a password between 6 and 72 characters.</p>";
+				$error = "Please create a password with a length between 6 and 72 characters.";
 			} elseif( !isset($_POST['email']) || !filter_var( $_POST['email'] ) ) {
-				echo "<p>Please enter a valid email address</p>";
+				$error = "Please enter a valid email address";
 			} elseif ( !isset($_POST['organization']) )  {
-				echo "<p>Please enter a valid organization</p>";
+				$error = "Please enter a valid organization";
 			} elseif ($dbh = open_db() ) {
 				try{ 
 					$stmt = $dbh->prepare("insert into users (username, password, email, organization) values (:username, :password, :email, :organization)");
@@ -47,17 +36,24 @@
 										  ":password" => password_hash($_POST['password']),
 										  ":email" => $_POST['email'],
 										  ":organization" => $_POST['organization']));
-					echo "<p>User successfully created.</p>";
 					$user_created = true;
 				} catch (PDOException $e) {
-					echo 'User could not be created: ' . $e->getMessage();
+					$error = "User could not be created: " . $e->getMessage();
 				}
 			} else {
-				echo "<p>Error connecting to db</p>";
+				$error = "Error connecting to db";
 			}
 		} ?>
 		
-		<?php if( !$user_created ): ?>
+		<?php if( $user_created ): ?>
+		
+		<p>User "<?= $_POST['username'] ?>" successfully created.</p>
+		<p><a href="login.php?username=<?= $_POST['username'] ?>">Login with your new account</a></p>
+		
+		<?php else: ?>
+			<?php if( $error ): ?>
+			<p class='error'><?= $error?></p>
+			<?php endif; ?>
 		<form action='register.php' method='post'>
 			<fieldset>
 				<legend>Account Details</legend>
@@ -118,33 +114,8 @@
 		</form>
 		<?php endif; ?>
 	</div>
-	
-	<footer>
-
-	</footer>
+	<?php include "includes/footer.inc.php" ?>
 </div> <!--! end of #container -->
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
-
-<!-- scripts concatenated and minified via ant build script-->
-<script src="js/plugins.js"></script>
-<script src="js/script.js"></script>
-<script src="js/libs/jquery.formalize.js"></script>
-<script src="js/libs/webshim/polyfiller.js"></script>
-<script>
-//thank you based polyfill
-if(!Modernizr.input.placeholder || !Modernizr.input.autofocus || !Modernizr.inputtypes.email ){
-	$.webshims.polyfill('forms');
-}
-</script>
-<!-- end scripts-->
-
-
-<!--[if lt IE 7 ]>
-	<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
-	<script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
-<![endif]-->
-
+<?php include "includes/scripts.inc.php" ?>
 </body>
 </html>
