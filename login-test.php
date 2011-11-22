@@ -9,7 +9,7 @@
 			$users = $dbh->prepare('select username, password from users where username = :username');
 			$users->execute(array(":username" => $myusername));
 			
-			if($user = $sth->fetch()) {
+			if($user = $users->fetch()) {
 				if( $user['password'] == sha1($mypassword) ) {
 					printf( "<p>Login for user %s successful</p>", $myusername);
 					session_register("myusername");
