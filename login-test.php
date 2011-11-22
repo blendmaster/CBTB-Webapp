@@ -7,11 +7,6 @@
   $myusername = mysql_real_escape_string(stripslashes($myusername));
   $mypassword = mysql_real_escape_string(stripslashes($mypassword));
 
-  $sql="SELECT * FROM users WHERE username ='$myusername' and password='$mypassword'";
-  $result=mysql_query($sql);
-
-  $count=mysql_num_rows($result);
-
     if ($dbh = open_db() ) {
 			try { 
 				$sth = $dbh->prepare("SELECT (username, password) FROM users WHERE username ='$myusername' and password='$mypassword'");
