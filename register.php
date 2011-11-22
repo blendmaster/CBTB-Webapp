@@ -65,7 +65,7 @@
 							<label for="username">Username:&nbsp;</label>
 						</td>
 						<td>
-							<input type="text" name="username" id="username" placeholder='Desired Username' required autofocus maxlength='25' <?php if( isset($_POST['username'] ) { printf( "value='%s'", $_POST['username']); } ?> />
+							<input type="text" name="username" id="username" placeholder='Desired Username' required autofocus maxlength='25' <?php if( isset($_POST['username']) ) { printf( "value='%s'", $_POST['username']); } ?> />
 						</td>
 					</tr>
 					
@@ -74,7 +74,7 @@
 							<label for="password">Password:&nbsp;</label>
 						</td>
 						<td>
-							<input type="password" name="password" id="password" placeholder="New Password" required <?php if( isset($_POST['password'] ) { printf( "value='%s'", $_POST['password']); } ?> />
+							<input type="password" name="password" id="password" placeholder="New Password" required <?php if( isset($_POST['password']) ) { printf( "value='%s'", $_POST['password']); } ?> />
 						</td>
 					</tr>
 					
@@ -83,7 +83,7 @@
 							<label for="email">Email:&nbsp;</label>
 						</td>
 						<td>
-							<input type="email" name="email" id="email" placeholder='Email Address' required maxlength='255' <?php if( isset($_POST['email'] ) { printf( "value='%s'", $_POST['email']); } ?>/>
+							<input type="email" name="email" id="email" placeholder='Email Address' required maxlength='255' <?php if( isset($_POST['email']) ) { printf( "value='%s'", $_POST['email']); } ?>/>
 						</td>
 					</tr>
 					
@@ -93,8 +93,17 @@
 						</td>
 						<td>
 							<select name="organization" id="organization">
-								<option value="organizationAlpha">Organization Alpha</option>
-								<option value="organizationOmega">Organization Omega</option>
+								<?php 
+									if( $dbh = open_db() ):
+										$organizations = $dbh->query('select * from organizations');
+										while( $organization = $organizations->fetch() ):
+											printf( "<option value='%i' %s>%s</option>", 
+											$organization['id'], 
+											isset( $_POST['organization'] ) && $_POST['organization'] == $organization['id'] ? "selected" : "",
+											$organization['name']);
+										endwhile;
+									endif;
+								?>
 							</select>
 						</td>
 					</tr>
