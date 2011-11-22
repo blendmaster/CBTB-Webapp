@@ -15,7 +15,7 @@
 					printf( "<p>Login for user %s successful</p>", $myusername);
 					$_SESSION['username'] = $_POST['username'];
 					?><script type="text/javascript">
-            <!-- window.location = "login.php" //-->
+            window.location = "login.php"
           </script><?php
 				} else {
 					printf( "<p>Incorrect password for user %s </p>", $myusername );
