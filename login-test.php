@@ -12,7 +12,6 @@
 			if($user = $users->fetch()) {
 				if( $user['password'] == sha1($mypassword) ) {
 					printf( "<p>Login for user %s successful</p>", $myusername);
-					session_start();
 					$_SESSION['username'] = $_POST['username'];
 					//header("location:login.php");
 					?><script type="text/javascript">
