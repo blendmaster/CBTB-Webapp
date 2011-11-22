@@ -13,7 +13,7 @@
 				if( $user['password'] == sha1($mypassword) ) {
 					printf( "<p>Login for user %s successful</p>", $myusername);
 					session_start();
-					$_SESSION['username'];
+					$_SESSION['username'] = $_POST['username'];
 					#header("location:login.php");
 				} else {
 					printf( "<p>Incorrect password for user %s </p>", $myusername );
