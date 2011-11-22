@@ -4,8 +4,8 @@
   $myusername=$_POST['username'];
   $mypassword=$_POST['password'];
 
-  $myusername = mysql_real_escape_string(stripslashes($myusername));
-  $mypassword = mysql_real_escape_string(stripslashes($mypassword));
+  $myusername = stripslashes($myusername);
+  $mypassword = stripslashes($mypassword);
 
     if ($dbh = open_db() ) {
 			try { 
@@ -22,7 +22,7 @@
   		  }
 			} catch (PDOException $e) {
 				echo 'Connection failed: ' . $e->getMessage();
-			}
+			}	
 		} else {
 			echo "<p>Error connecting to db</p>";
 		}
