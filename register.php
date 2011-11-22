@@ -42,7 +42,7 @@
 							<label for="password">Password:&nbsp;</label>
 						</td>
 						<td>
-							<input type="password" name="password" id="password" required />
+							<input type="password" name="password" id="password" placeholder="New Password" required />
 						</td>
 					</tr>
 					
