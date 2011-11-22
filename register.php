@@ -26,12 +26,12 @@
 	
 	<div id="main" role="main">
 		<?php 
-		include "/includes/db.inc.php";
+		include "includes/db.inc.php";
 		$user_created = false;
 		if( count($_POST) > 0 ) {
-			if( !isset($_POST['username']) || !preg_match( '/^\w/$', $_POST['username'] ) ) {
+			if( !isset($_POST['username']) || !preg_match( '/^\w+$/', $_POST['username'] ) ) {
 				echo "<p>Your username cannot contain spaces or special characters</p>";
-			} elseif( !isset($_POST['password']) || strlen( $_POST['password'] < 6 ) ) {
+			} elseif( !isset($_POST['password']) || strlen( $_POST['password'] ) < 6 ) {
 				echo "<p>Please create a longer password.</p>";
 			} elseif( !isset($_POST['email']) || !filter_var( $_POST['email'] ) ) {
 				echo "<p>Please enter a valid email address</p>";
@@ -44,7 +44,7 @@
 					$stmt->execute(array( ":username" => $_POST['username'],
 										  ":password" => $_POST['password'],
 										  ":email" => $_POST['email'],
-										  ":organization" => $_POST['organization']);
+										  ":organization" => $_POST['organization']));
 					echo "<p>User successfully created.</p>";
 					$user_created = true;
 				} catch (PDOException $e) {

@@ -8,7 +8,9 @@ function open_db() {
 	
 	try {  
 		# MySQL with PDO_MYSQL  
-		return new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);  
+		$dbh =  new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);  
+		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		return $dbh;
 	}  
 		catch(PDOException $e) {  
 		echo $e->getMessage();  
