@@ -10,25 +10,23 @@
 <body>
 <?php
 	include "includes/db.inc.php";
-
-	$myusername = $_POST['username'];
-	$mypassword = $_POST['password'];
+	include "includes/PasswordHash.php";
 	
 	if ($dbh = open_db() ) {
 		try { 
 			$users = $dbh->prepare('select username, password from users where username = :username');
-			$users->execute(array(":username" => $myusername));
+			$users->execute(array(":username" => $_POST['username'];));
 			
 			if($user = $users->fetch()) {
-				if( $user['password'] == sha1($mypassword) ) {
-					printf( "<p>Login for user %s successful</p>", $myusername);
+				if( password_check($_POST['password'], $user['password']) ) {
+					printf( "<p>Login for user %s successful</p>", $_POST['username']);
 					$_SESSION['username'] = $_POST['username'];
 					?><a href="dashboard.php">Login successful, being redirected...</a><script type="text/javascript">setTimeout('redirecter()', 2000);</script><?php
 				} else {
-					printf( "<p>Incorrect password for user %s </p>", $myusername );
+					printf( "<p>Incorrect password for user %s </p>", $_POST['username']; );
 				}
 			} else {
-				printf( "<p>user %s doesn't exist</p>", $myusername);
+				printf( "<p>user %s doesn't exist</p>", $_POST['username'];);
 			}
 		} catch (PDOException $e) {
 			echo 'Connection failed: ' . $e->getMessage();
@@ -38,4 +36,4 @@
 	}
 ?>
 </body>
-</html?
+</html>

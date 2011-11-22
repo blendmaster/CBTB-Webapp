@@ -28,12 +28,13 @@
 	<div id="main" role="main">
 		<?php 
 		include "includes/db.inc.php";
+		include "includes/PasswordHash.php";
 		$user_created = false;
 		if( count($_POST) > 0 ) {
 			if( !isset($_POST['username']) || !preg_match( '/^\w+$/', $_POST['username'] ) ) {
 				echo "<p>Your username cannot contain spaces or special characters</p>";
-			} elseif( !isset($_POST['password']) || strlen( $_POST['password'] ) < 6 ) {
-				echo "<p>Please create a longer password.</p>";
+			} elseif( !isset($_POST['password']) || strlen( $_POST['password'] ) < 6 || strlen( $_POST['password'] ) > 72) {
+				echo "<p>Please create a password between 6 and 72 characters.</p>";
 			} elseif( !isset($_POST['email']) || !filter_var( $_POST['email'] ) ) {
 				echo "<p>Please enter a valid email address</p>";
 			} elseif ( !isset($_POST['organization']) )  {
@@ -43,7 +44,7 @@
 					$stmt = $dbh->prepare("insert into users (username, password, email, organization) values (:username, :password, :email, :organization)");
 				
 					$stmt->execute(array( ":username" => $_POST['username'],
-										  ":password" => sha1($_POST['password']),
+										  ":password" => password_hash($_POST['password']),
 										  ":email" => $_POST['email'],
 										  ":organization" => $_POST['organization']));
 					echo "<p>User successfully created.</p>";
@@ -54,9 +55,9 @@
 			} else {
 				echo "<p>Error connecting to db</p>";
 			}
-		}
-		if( !$user_created ):
-		?>
+		} ?>
+		
+		<?php if( !$user_created ): ?>
 		<form action='register.php' method='post'>
 			<fieldset>
 				<legend>Account Details</legend>
@@ -95,15 +96,15 @@
 						<td>
 							<select name="organization" id="organization">
 								<?php 
-									if( $dbh = open_db() ):
+									if( $dbh = open_db() ) {
 										$organizations = $dbh->query('select * from organizations');
-										while( $organization = $organizations->fetch() ):
-											printf( "<option value='%s' %s>%s</option>", 
+										while( $organization = $organizations->fetch() ) {
+											printf( "\t\t\t\t\t\t\t\t<option value='%s' %s>%s</option>\n", 
 											$organization['id'], 
 											(isset( $_POST['organization'] ) && $_POST['organization'] == $organization['id'] ) ? "selected" : "",
 											$organization['name']);
-										endwhile;
-									endif;
+										}
+									}
 								?>
 							</select>
 						</td>
