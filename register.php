@@ -29,15 +29,15 @@
 		include "/includes/db.inc.php";
 		$user_created = false;
 		if( count($_POST) > 0 ) {
-			if( !isset($_POST['username']) || !preg_match( '/^\w/$', $_POST['username'] ) {
+			if( !isset($_POST['username']) || !preg_match( '/^\w/$', $_POST['username'] ) ) {
 				echo "<p>Your username cannot contain spaces or special characters</p>";
-			} elseif( !isset($_POST['password']) || strlen( $_POST['password'] < 6 ) {
+			} elseif( !isset($_POST['password']) || strlen( $_POST['password'] < 6 ) ) {
 				echo "<p>Please create a longer password.</p>";
-			} elseif( !isset($_POST['email']) || !filter_var( $_POST['email'] ) {
+			} elseif( !isset($_POST['email']) || !filter_var( $_POST['email'] ) ) {
 				echo "<p>Please enter a valid email address</p>";
-			} elseif ( !isset($_POST['organization'])  {
+			} elseif ( !isset($_POST['organization']) )  {
 				echo "<p>Please enter a valid organization</p>";
-			} elseif ($dbh = open_db() {
+			} elseif ($dbh = open_db() ) {
 				try{ 
 					$stmt = $dbh->prepare("insert into users (username, password, email, organization) values (:username, :password, :email, :organization");
 				
