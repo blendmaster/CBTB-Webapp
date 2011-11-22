@@ -5,11 +5,11 @@
   $mypassword=$_POST['password'];
 
   $myusername = stripslashes($myusername);
-  $mypassword = stripslashes($mypassword);
+  $mypassword = sha1(stripslashes($mypassword));
 
     if ($dbh = open_db() ) {
 			try { 
-				$sth = $dbh->prepare("SELECT (username, password) FROM users WHERE username ='$myusername' and password='sha1($mypassword)'");
+				$sth = $dbh->prepare("SELECT (username, password) FROM users WHERE username ='$myusername' and password='$mypassword'");
 			
 				$sth->setFetchMode(PDO::FETCH_OBJ);
 				
