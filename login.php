@@ -39,6 +39,7 @@
 			<li><a href="adddonor.html">Add Donors</a></li>
 			<li><a href="adddonation.html">Add Donation</a></li>
 			<li><a href="books.html">Book Inventory</a></li>
+			<li><a href="logout.php">Logout</a></li>
 		</ul>
 		</br>
 		<p> Summary for Bob:

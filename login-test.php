@@ -12,11 +12,23 @@
 
   $count=mysql_num_rows($result);
 
-  if($count==1) {
-    session_register("myusername");
-    session_register("mypassword");
-    header("location:login.php");
-  } else {
-    echo "Wrong Username or Password";
-  }
+    if ($dbh = open_db() ) {
+			try { 
+				$sth = $dbh->prepare("SELECT (username, password) FROM users WHERE username ='$myusername' and password='$mypassword'");
+			
+				$sth->setFetchMode(PDO::FETCH_OBJ);
+				
+				if($row = $sth->fetch()) {
+  				session_register("myusername");
+          session_register("mypassword");
+          header("location:login.php");
+  		  } else {
+  		    echo "Wrong username or password";
+  		  }
+			} catch (PDOException $e) {
+				echo 'Connection failed: ' . $e->getMessage();
+			}
+		} else {
+			echo "<p>Error connecting to db</p>";
+		}
 ?>

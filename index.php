@@ -33,6 +33,7 @@
 			<li><a href="adddonor.php">Add Donors</a></li>
 			<li><a href="adddonation.php">Add Donation</a></li>
 			<li><a href="books.php">Book Inventory</a></li>
+			<li><a href="logout.php">Logout</a></li>
 		</ul>
 	</nav>
 	<div id="main" role="main">
