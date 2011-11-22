@@ -23,7 +23,7 @@
 				if( $user['password'] == sha1($mypassword) ) {
 					printf( "<p>Login for user %s successful</p>", $myusername);
 					$_SESSION['username'] = $_POST['username'];
-					?><a href="dashboard.php">Login successful, being redirected...</a><script type="text/javascript">redirecter('alertMsg()', 1000);</script><?php
+					?><a href="dashboard.php">Login successful, being redirected...</a><script type="text/javascript">setTimeout('window.location = "dashboard.php"()', 2000);</script><?php
 				} else {
 					printf( "<p>Incorrect password for user %s </p>", $myusername );
 				}
