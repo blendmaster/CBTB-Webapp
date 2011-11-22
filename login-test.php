@@ -15,6 +15,7 @@
 				$sth = $dbh->prepare($query);
 			
 				$sth->setFetchMode(PDO::FETCH_OBJ);
+				$stmt->execute();
 				
 				var_dump($sth);
 				
