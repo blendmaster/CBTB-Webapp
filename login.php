@@ -28,7 +28,7 @@
 
 <div id="container">
 	<header>
-	<p> Welcome back Bob </p>
+	<p> Welcome back <?php echo $_SESSION['username']; ?></p>
 	</header>
 	<div id="main" role="main">
 		<ul>
@@ -42,13 +42,13 @@
 			<li><a href="logout.php">Logout</a></li>
 		</ul>
 		</br>
-		<p> Summary for Bob:
+		<p> Summary for <?php echo $_SESSION['username']; ?>:
 		<table border = "1">
 			<tr>
 			<td>User</td><td>Books Collected</td><td>Sold Books</td><td>Recycled Books</td><td>$ raised</td>
 			</tr>
 			<tr>
-			<td>Bob</td><td>$0</td><td>$0</td><td>$0</td><td>$0</td>
+			<td><?php echo $_SESSION['username']; ?></td><td>$0</td><td>$0</td><td>$0</td><td>$0</td>
 			</tr>
 			</table>
 	</div>
