@@ -14,7 +14,9 @@
 				if( $user['password'] == sha1($mypassword) ) {
 					printf( "<p>Login for user %s successful</p>", $myusername);
 					$_SESSION['username'] = $_POST['username'];
-					?><a href="login.php">Special page for logged in members</a><?php
+					?><script type="text/javascript">
+            <!-- window.location = "login.php" //-->
+          </script><?php
 				} else {
 					printf( "<p>Incorrect password for user %s </p>", $myusername );
 				}
