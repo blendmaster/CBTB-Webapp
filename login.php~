@@ -23,6 +23,27 @@
 
 	<script src="js/libs/modernizr-2.0.6.min.js"></script>
 	
+	<?
+		include "includes/db.inc.php";
+
+		
+	?>
+
+	<?php
+		if($_POST['username']) {
+		  $query = "select username from users where username = " . $_POST['username'];
+		  $result = $db->query($query);
+		  if($_POST['password']) {
+        if($_POST['password'] == $row[0]['password']) {
+        
+        } else {
+          echo "Wrong password";
+        }
+		  } else {
+  		  echo "No password";
+  		}
+		}
+	?>
 </head>
 <body>
 
