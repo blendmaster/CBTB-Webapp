@@ -49,7 +49,7 @@
 					echo "<p>User successfully created.</p>";
 					$user_created = true;
 				} catch (PDOException $e) {
-					echo 'Connection failed: ' . $e->getMessage();
+					echo 'User could not be created: ' . $e->getMessage();
 				}
 			} else {
 				echo "<p>Error connecting to db</p>";
@@ -98,9 +98,9 @@
 									if( $dbh = open_db() ):
 										$organizations = $dbh->query('select * from organizations');
 										while( $organization = $organizations->fetch() ):
-											printf( "<option value='%i' %s>%s</option>", 
+											printf( "<option value='%s' %s>%s</option>", 
 											$organization['id'], 
-											isset( $_POST['organization'] ) && $_POST['organization'] == $organization['id'] ? "selected" : "",
+											(isset( $_POST['organization'] ) && $_POST['organization'] == $organization['id'] ) ? "selected" : "",
 											$organization['name']);
 										endwhile;
 									endif;
