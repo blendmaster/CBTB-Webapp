@@ -14,7 +14,8 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 
 	<link rel="stylesheet" href="css/style.css">
-
+	<link rel="stylesheet" href="css/formalize.css">
+	
 	<script src="js/libs/modernizr-2.0.6.min.js"></script>
 </head>
 <body>
@@ -36,9 +37,10 @@
 	</nav>
 	<div id="main" role="main">
 		<form action="login-test.php" method="post">
-			<p><label for="username">username: </label><input type="text" id='username' name='username' /></p>
-			<p><label for="pasword">password: </label><input type="password" id='password' name='password' /></p>
-			<p><input type="submit"/></p>
+			<h2>Login</h2>
+			<input type="text" id='username' name='username' placeholder='username' />
+			<input type="password" id='password' name='password' placeholder='password' />
+			<input type="submit" value='login' />
 		</form>
 	</div>
 	<footer>
@@ -52,6 +54,14 @@
 <!-- scripts concatenated and minified via ant build script-->
 <script src="js/plugins.js"></script>
 <script src="js/script.js"></script>
+<script src="js/libs/jquery.formalize.js"></script>
+<script src="js/libs/webshim/polyfiller.js"></script>
+<script>
+//thank you based polyfill
+if(!Modernizr.input.placeholder || !Modernizr.input.autofocus || !Modernizr.inputtypes.email ){
+	$.webshims.polyfill('forms');
+}
+</script>
 <!-- end scripts-->
 
 
