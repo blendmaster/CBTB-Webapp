@@ -3,7 +3,7 @@
 <head>
   <script type="text/javascript">
     function redirecter(){
-        window.location = "dashboard.php"
+        window.location = "dashboard.php";
     }
   </script>
 </head>
@@ -23,7 +23,7 @@
 				if( $user['password'] == sha1($mypassword) ) {
 					printf( "<p>Login for user %s successful</p>", $myusername);
 					$_SESSION['username'] = $_POST['username'];
-					?><a href="dashboard.php" onLoad="setTimeout('redirecter()', 5000)">Login successful, being redirected...</a><?php
+					?><a href="dashboard.php">Login successful, being redirected...</a><script type="text/javascript">redirecter('alertMsg()', 1000);</script><?php
 				} else {
 					printf( "<p>Incorrect password for user %s </p>", $myusername );
 				}
