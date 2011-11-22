@@ -14,7 +14,8 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 
 	<link rel="stylesheet" href="css/style.css">
-
+	<link rel="stylesheet" href="css/formalize.css">
+	
 	<script src="js/libs/modernizr-2.0.6.min.js"></script>
 </head>
 <body>
@@ -122,12 +123,13 @@
 	</footer>
 </div> <!--! end of #container -->
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
 
 <!-- scripts concatenated and minified via ant build script-->
 <script src="js/plugins.js"></script>
 <script src="js/script.js"></script>
+<script src="js/libs/jquery.formalize.js"></script>
 <script src="js/libs/webshim/polyfiller.js"></script>
 <script>
 //thank you based polyfill
