@@ -15,7 +15,8 @@
 ### github.com/paulirish/html5-boilerplate-server-configs
 ###
 
-
+#block git access
+RedirectMatch 404 /\\.git(/.*|$)
 
 # ----------------------------------------------------------------------
 # Better website experience for IE users
