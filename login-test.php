@@ -1,25 +1,25 @@
 <?php
 	include "includes/db.inc.php";
 
-	$username = $_POST['username'];
-	$password = $_POST['password'];
+	$myusername = $_POST['username'];
+	$mypassword = $_POST['password'];
 	
 	if ($dbh = open_db() ) {
 		try { 
 			$users = $dbh->prepare('SELECT (username, password) FROM users WHERE username = :username');
-			$users->execute(array(":username" => $username));
+			$users->execute(array(":username" => $myusername));
 			
 			if($user = $sth->fetch()) {
-				if( $user['password'] == sha1($password) ) {
-					printf( "<p>Login for user %s successful</p>", $username);
-					session_register("username");
-					session_register("password");
+				if( $user['password'] == sha1($mypassword) ) {
+					printf( "<p>Login for user %s successful</p>", $myusername);
+					session_register("myusername");
+					session_register("mypassword");
 					#header("location:login.php");
 				} else {
-					printf( "<p>Incorrect password for user %s </p>", $username );
+					printf( "<p>Incorrect password for user %s </p>", $myusername );
 				}
 			} else {
-				printf( "<p>user %s doesn't exist</p>", $username);
+				printf( "<p>user %s doesn't exist</p>", $myusername);
 			}
 		} catch (PDOException $e) {
 			echo 'Connection failed: ' . $e->getMessage();
