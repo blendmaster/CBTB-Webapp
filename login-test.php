@@ -15,9 +15,9 @@
 					session_start();
 					$_SESSION['username'] = $_POST['username'];
 					//header("location:login.php");
-					<script type="text/javascript">
+					?><script type="text/javascript">
             <!-- window.location = "login.php" //-->
-          </script>
+          </script><?php
 				} else {
 					printf( "<p>Incorrect password for user %s </p>", $myusername );
 				}
