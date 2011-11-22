@@ -11,7 +11,8 @@
 
     if ($dbh = open_db() ) {
 			try { 
-				$sth = $dbh->prepare("SELECT (username, password) FROM users WHERE username ='$myusername' and password='$mypassword'");
+			  $query = 'SELECT (username, password) FROM users WHERE username = ' . $myusername . ' and password = ' . $mypassword;
+				$sth = $dbh->prepare($query);
 			
 				$sth->setFetchMode(PDO::FETCH_OBJ);
 				
