@@ -1,3 +1,33 @@
+<?php 
+require_once "includes/db.inc.php";
+require_once "includes/PasswordHash.php";
+$user_created = false;
+$error = false;
+if( count($_POST) > 0 ) {
+	if( !isset($_POST['username']) || !preg_match( '/^\w+$/', $_POST['username'] ) ) {
+		$error = "Your username cannot contain spaces or special characters";
+	} elseif( !isset($_POST['password']) || strlen( $_POST['password'] ) < 6 || strlen( $_POST['password'] ) > 72) {
+		$error = "Please create a password with a length between 6 and 72 characters.";
+	} elseif( !isset($_POST['email']) || !filter_var( $_POST['email'] ) ) {
+		$error = "Please enter a valid email address";
+	} elseif ( !isset($_POST['organization']) )  {
+		$error = "Please enter a valid organization";
+	} elseif ($dbh = open_db() ) {
+		try{ 
+			$stmt = $dbh->prepare("insert into users (username, password, email, organization) values (:username, :password, :email, :organization)");
+		
+			$stmt->execute(array( ":username" => $_POST['username'],
+								  ":password" => password_hash($_POST['password']),
+								  ":email" => $_POST['email'],
+								  ":organization" => $_POST['organization']));
+			$user_created = true;
+		} catch (PDOException $e) {
+			$error = "User could not be created: " . $e->getMessage();
+		}
+	} else {
+		$error = "Error connecting to db";
+	}
+} ?>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
@@ -14,47 +44,14 @@
 <div id="container">
 	<?php include "includes/header.inc.php" ?>
 	<div id="main" role="main">
-		<?php 
-		include "includes/db.inc.php";
-		include "includes/PasswordHash.php";
-		$user_created = false;
-		$error = false;
-		if( count($_POST) > 0 ) {
-			if( !isset($_POST['username']) || !preg_match( '/^\w+$/', $_POST['username'] ) ) {
-				$error = "Your username cannot contain spaces or special characters";
-			} elseif( !isset($_POST['password']) || strlen( $_POST['password'] ) < 6 || strlen( $_POST['password'] ) > 72) {
-				$error = "Please create a password with a length between 6 and 72 characters.";
-			} elseif( !isset($_POST['email']) || !filter_var( $_POST['email'] ) ) {
-				$error = "Please enter a valid email address";
-			} elseif ( !isset($_POST['organization']) )  {
-				$error = "Please enter a valid organization";
-			} elseif ($dbh = open_db() ) {
-				try{ 
-					$stmt = $dbh->prepare("insert into users (username, password, email, organization) values (:username, :password, :email, :organization)");
-				
-					$stmt->execute(array( ":username" => $_POST['username'],
-										  ":password" => password_hash($_POST['password']),
-										  ":email" => $_POST['email'],
-										  ":organization" => $_POST['organization']));
-					$user_created = true;
-				} catch (PDOException $e) {
-					$error = "User could not be created: " . $e->getMessage();
-				}
-			} else {
-				$error = "Error connecting to db";
-			}
-		} ?>
-		
 		<?php if( $user_created ): ?>
-		
-		<p>User "<?= $_POST['username'] ?>" successfully created.</p>
-		<p><a href="login.php?username=<?= $_POST['username'] ?>">Login with your new account</a></p>
-		
+			<p>User "<?= $_POST['username'] ?>" successfully created.</p>
+			<p><a href="login.php?username=<?= $_POST['username'] ?>">Login with your new account</a></p>
 		<?php else: ?>
 			<?php if( $error ): ?>
 			<p class='error'><?= $error?></p>
 			<?php endif; ?>
-		<form action='register.php' method='post'>
+			<form action='register.php' method='post'>
 			<fieldset>
 				<legend>Account Details</legend>
 				<table>	

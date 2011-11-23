@@ -1,6 +1,6 @@
-<?
-session_start();
-session_destroy();
-header("location:index.php");
+<?php
+require_once "includes/session.inc.php";
+log_out();
+header('Location: http://{$_SERVER['SERVER_NAME']}/team13/index.php'); 
 ?>
 
