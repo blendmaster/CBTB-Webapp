@@ -16,7 +16,12 @@
 				<li><a href="books.php">Book Inventory</a></li>
 				<li><a href="logout.php">Logout</a></li>
 			<?php else: ?>
-				<li><a href="login.php">Login</a></li>
+				<li><form action="login.php" method="post">
+						<input type="text" id='username' name='username' placeholder='username' />
+						<input type="password" id='password' name='password' placeholder='password' />
+						<input type="submit" value='login' />
+					</form>
+				</li>
 				<li><a href="register.php">Register</a></li>
 			<?php endif; ?>
 		</ul>

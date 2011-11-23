@@ -14,12 +14,8 @@
 <div id="container">
 	<?php include "includes/header.inc.php" ?>
 	<div id="main" role="main">
-		<form action="login.php" method="post">
-			<h2>Login</h2>
-			<input type="text" id='username' name='username' placeholder='username' />
-			<input type="password" id='password' name='password' placeholder='password' />
-			<input type="submit" value='login' />
-		</form>
+		<p>Welcome to Compassion by the Book. </p>
+		<p>Books. Beets. Battlestar Galactica.</p>
 	</div>
 	<?php include "includes/footer.inc.php" ?>
 </div> <!--! end of #container -->
