@@ -15,6 +15,10 @@
 ### github.com/paulirish/html5-boilerplate-server-configs
 ###
 
+
+#autostart session
+php_flag session.auto_start on
+
 #block git access
 RedirectMatch 404 /\\.git(/.*|$)
 

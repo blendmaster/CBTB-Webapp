@@ -1,4 +1,5 @@
 <?php
+	ob_start();
 	require_once "includes/db.inc.php";
 	require_once "includes/PasswordHash.php";
 	require_once "includes/session.inc.php";
@@ -17,7 +18,7 @@
 				if($user = $users->fetch()) {
 					if( password_check($password, $user['password']) ) {
 						log_in($user);
-						header('Location: http://{$_SERVER['SERVER_NAME']}/team13/dashboard.php'); 
+						header("Location: http://{$_SERVER['SERVER_NAME']}/team13/dashboard.php"); 
 					} else {
 						$error = "Incorrect password for user \"$username\"";
 					}

@@ -3,6 +3,7 @@
 		<h1><a href="index.php">Compassion By The Book</a></h1>
 		<?php if( logged_in() ): ?>
 			<p>Welcome <?= $_SESSION['username'] ?></p>
+		<?php endif ?>
 	</header>
 	<nav>
 		<ul>
@@ -17,6 +18,6 @@
 			<?php else: ?>
 				<li><a href="login.php">Login</a></li>
 				<li><a href="register.php">Register</a></li>
-			<?php endif ?>
+			<?php endif; ?>
 		</ul>
 	</nav>

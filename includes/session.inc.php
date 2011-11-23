@@ -1,6 +1,6 @@
 ﻿<?php 
 	function logged_in() {
-		return empty(session_id());
+		return isset($_SESSION['user_id']);
 	}
 	
 	function log_in($user) {
