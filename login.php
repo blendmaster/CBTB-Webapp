@@ -1,4 +1,5 @@
 <?php
+	ob_start(); #output buffer for redirect
 	require_once "includes/db.inc.php";
 	require_once "includes/PasswordHash.php";
 	require_once "includes/session.inc.php";
@@ -18,6 +19,7 @@
 					if( password_check($password, $user['password']) ) {
 						log_in($user);
 						header("Location: http://{$_SERVER['SERVER_NAME']}/team13/dashboard.php"); 
+						exit();
 					} else {
 						$error = "Incorrect password for user \"$username\"";
 					}
@@ -53,7 +55,7 @@
 	<div id="main" role="main">
 		<form action="login.php" method="post">
 			<h2>Login</h2>
-			<input type="text" id='username' name='username' placeholder='username' <?php if( isset($_GET['username']) ) echo "value=\"{$_GET['username']}\""; ?> />
+			<input type="text" id='username' name='username' placeholder='username' autofocus <?php if( isset($_GET['username']) ) echo "value=\"{$_GET['username']}\""; ?> />
 			<input type="password" id='password' name='password' placeholder='password' />
 			<input type="submit" value='login' />
 		</form>
