@@ -1,9 +1,3 @@
-<?php
-  session_start();
-  if(!$_SESSION['username']){
-    header("location:index.php");
-  }
-?>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->

@@ -262,7 +262,4 @@ function password_check($password, $hash) {
 	$hasher = new PasswordHash(8,false);
 	return $hasher->CheckPassword($password,$hash);
 }
-
-
-
 ?>
