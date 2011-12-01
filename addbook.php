@@ -34,11 +34,6 @@ if( count($_POST) > 0 ) {
 			$stmt->bind_param($ISBN, $title, $author, $donation_ID);
 			$stmt->execute();
 			
-			if( isset($_POST['receipt'] && $_POST['receipt'] == 'yes' )
-			{
-				$to = $_SESSION['username']
-			}
-			
 			$book_added = true;
 		} catch (PDOException $e) {
 			$error = "Book was not added: " . $e->getMessage();
