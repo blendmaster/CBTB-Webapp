@@ -88,7 +88,7 @@ if( count($_POST) > 0 ) {
 							<label for="ISBN">ISBN:&nbsp;</label>
 						</td>
 						<td>
-							<input type="ISBN" name="ISBN" id="ISBN" placeholder="ISBN" required maxlength='13' <?php if( isset($_POST['ISBN']) ) { printf( "value='%i'", $_POST['ISBN']); } ?> />
+							<input type="ISBN" name="ISBN" id="ISBN" placeholder="ISBN" required maxlength='13' <?php if( isset($_POST['ISBN']) ) { printf( "value='%s'", $_POST['ISBN']); } ?> />
 						</td>
 					</tr>
 					
