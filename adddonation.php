@@ -13,7 +13,7 @@
 		  $error = "Please enter a valid organization";
 	  } elseif ($dbh = open_db() ) {
 		  try{ 
-			  $stmt = $dbh->prepare("insert into donation () values (:donator, :organization, :location)");
+			  $stmt = $dbh->prepare("insert into donation (user, organization, location) values (:donator, :organization, :location)");
 		
 			  $stmt->execute(array( ":donator" => $_POST['donator'],
 								    ":email" => $_POST['email'],
