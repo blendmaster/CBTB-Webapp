@@ -18,7 +18,9 @@
 		    $parts = array( ":donator" => $_POST['donator'],
 								    ":email" => $_POST['email'],
 								    ":organization" => $_POST['organization'])
-			  $stmt->execute($parts);
+			  $stmt->execute(array( ":donator" => $_POST['donator'],
+								    ":email" => $_POST['email'],
+								    ":organization" => $_POST['organization']));
 			  var_dump($parts);
 			  $donation_created = true;
 		  } catch (PDOException $e) {
