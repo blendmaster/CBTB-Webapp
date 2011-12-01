@@ -14,10 +14,12 @@
 	  } elseif ($dbh = open_db() ) {
 		  try{ 
 			  $stmt = $dbh->prepare("insert into donation (donator, organization, location) values (:user, :organization, :location)");
-		
-			  $stmt->execute(array( ":donator" => $_POST['donator'],
+		    
+		    $parts = array( ":donator" => $_POST['donator'],
 								    ":email" => $_POST['email'],
-								    ":organization" => $_POST['organization']));
+								    ":organization" => $_POST['organization'])
+			  $stmt->execute($parts);
+			  var_dump($parts);
 			  $donation_created = true;
 		  } catch (PDOException $e) {
 			  $error = "Donation could not be created: " . $e->getMessage();
