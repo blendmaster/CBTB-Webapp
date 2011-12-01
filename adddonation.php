@@ -15,13 +15,11 @@
 		  try{ 
 			  $stmt = $dbh->prepare("insert into donation (donator, organization, location) values (:user, :organization, :location)");
 		    
-		    $parts = array( ":donator" => $_POST['donator'],
+		    $data = array( ":donator" => $_POST['donator'],
 								    ":email" => $_POST['email'],
-								    ":organization" => $_POST['organization'])
-			  $stmt->execute(array( ":donator" => $_POST['donator'],
-								    ":email" => $_POST['email'],
-								    ":organization" => $_POST['organization']));
-			  var_dump($parts);
+								    ":organization" => $_POST['organization']);
+			  $stmt->execute($data);
+			  var_dump($data);
 			  $donation_created = true;
 		  } catch (PDOException $e) {
 			  $error = "Donation could not be created: " . $e->getMessage();
