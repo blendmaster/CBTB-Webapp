@@ -1,55 +1,31 @@
-<?php
-	ob_start(); #output buffer for redirect
-	require_once "includes/db.inc.php";
-	require_once "includes/PasswordHash.php";
-	require_once "includes/session.inc.php";
-	
-	$error = false;
-	
-	class donation{
-	  public $user;
-	  public $organization;
-	  public $location;
-	  
-	  function __construct($u,$o,$l) {
-	    $this->user = $n;
-	    $this->organization = $o;
-	    $this->location = $l;
+<?php 
+  require_once "includes/db.inc.php";
+  require_once "includes/PasswordHash.php";
+  require_once "includes/session.inc.php";
+  $donation_created = false;
+  $error = false;
+  if( count($_POST) > 0 ) {
+    if(!isset($_POST['donator'])) {
+      $error = "Please enter a valid donator";
+    } elseif(!isset($_POST['location'])) {
+      $error = "Please enter a valid location";
+    } elseif ( !isset($_POST['organization']) )  {
+		  $error = "Please enter a valid organization";
+	  } elseif ($dbh = open_db() ) {
+		  try{ 
+			  $stmt = $dbh->prepare("insert into donation () values (:donator, :organization, :location)");
+		
+			  $stmt->execute(array( ":donator" => $_POST['donator'],
+								    ":email" => $_POST['email'],
+								    ":organization" => $_POST['organization']));
+			  $donation_created = true;
+		  } catch (PDOException $e) {
+			  $error = "User could not be created: " . $e->getMessage();
+		  }
+	  } else {
+		  $error = "Error connecting to db";
 	  }
-	  
-	}
-	
-	$test = new donation('one', 'two', 'three');
-	echo $test->user;
-	var_dump($test);
-	
-	if( count($_POST) > 0 and 
-	  $username = $_POST['username'] and
-		$password = $_POST['password'] ) {
-
-		if ($dbh = open_db() ) {
-			try { 
-				$users = $dbh->prepare('select id, username, password from users where username = :username');
-				$users->execute(array(":username" => $username));
-				
-				if($user = $users->fetch()) {
-					if( password_check($password, $user['password']) ) {
-						log_in($user);
-						header("Location: http://{$_SERVER['SERVER_NAME']}/team13/dashboard.php"); 
-						exit();
-					} else {
-						$error = "Incorrect password for user \"$username\"";
-					}
-				} else {
-					$error = "user \"$username\" doesn't exist.";
-				}
-			} catch (PDOException $e) {
-				$error = 'Connection failed: ' . $e->getMessage();
-			}	
-		} else {
-			$error = "Error connecting to db";
-		}
-	}
+  }
 ?>
 
 <!doctype html>
@@ -68,10 +44,51 @@
 <div id="container">
 	<?php include "includes/header.inc.php" ?>
 	<div id="main" role="main">
-		<form>
-      <label for="cause">Cause</label><input type="text" name="cause" id="cause" />
-      <label for="location">Location</label><input type="text" name="location" id="location" />
-    </form>
+	  <form action='adddonation.php' method='post'>
+			<fieldset>
+				<table>	
+					<tr>
+						<td>
+							<label for="donator">Donator:&nbsp;</label>
+						</td>
+						<td>
+							<input type="text" name="donator" id="donator" />
+						</td>
+					</tr>
+          <tr>
+						<td>
+							<label for="organization">Organization:&nbsp; </label>
+						</td>
+						<td>
+							<select name="organization" id="organization">
+								<?php 
+									if( $dbh = open_db() ) {
+										$organizations = $dbh->query('select * from organizations');
+										while( $organization = $organizations->fetch() ) {
+											printf( "\t\t\t\t\t\t\t\t<option value='%s' %s>%s</option>\n", 
+											$organization['id'], 
+											(isset( $_POST['organization'] ) && $_POST['organization'] == $organization['id'] ) ? "selected" : "",
+											$organization['name']);
+										}
+									}
+								?>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label for="location">Location:&nbsp;</label>
+						</td>
+						<td>
+							<input type="text" name="location" id="location" />
+						</td>
+					</tr>
+				</table>
+				<p>
+					<input type="Submit" value="Create Account" />
+				</p>
+			</fieldset>
+		</form>
 	</div>
 	<?php include "includes/footer.inc.php" ?>
 </div> <!--! end of #container -->
