@@ -21,6 +21,7 @@
 	
 	$test = new donation('one', 'two', 'three');
 	echo $test->user;
+	var_dump($test);
 	
 	if( count($_POST) > 0 and 
 	  $username = $_POST['username'] and
