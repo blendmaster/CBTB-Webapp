@@ -20,12 +20,13 @@
 								    ":organization" => $_POST['organization']));
 			  $donation_created = true;
 		  } catch (PDOException $e) {
-			  $error = "User could not be created: " . $e->getMessage();
+			  $error = "Donation could not be created: " . $e->getMessage();
 		  }
 	  } else {
 		  $error = "Error connecting to db";
 	  }
   }
+  if($error) echo $error;
 ?>
 
 <!doctype html>
@@ -85,7 +86,7 @@
 					</tr>
 				</table>
 				<p>
-					<input type="Submit" value="Create Account" />
+					<input type="Submit" value="Add Donation" />
 				</p>
 			</fieldset>
 		</form>
