@@ -1,3 +1,47 @@
+<?php 
+require_once "includes/db.inc.php";
+$book_added = false;
+$error = false;
+if( count($_POST) > 0 ) {
+	if( !isset($_POST['title']) ) {
+		$error = "Please enter a book title";
+	} elseif( !isset($_POST['author']) || !preg_match( '^[a-zA-Z]+\s[a-zA-Z]+$', $_POST['author'] ) ) {
+		$error = "The author name must be first and last and cannot contain special characters";
+	} elseif( !isset($_POST['ISBN']) || strlen( $_POST['ISBN'] ) < 10 || strlen( $_POST['ISBN'] ) > 13) {
+		$error = "Please enter a valid ISBN";
+	} elseif( !isset($_POST['location']) )  {
+		$error = "Please enter a location";
+	} elseif( !isset($_POST['organization']) )  {
+		$error = "Please enter a valid organization";
+	} elseif ($dbh = open_db() ) {
+		try{
+			$username = $_SESSION['username'];
+			$organization = $_POST['organization'];
+			$location = $_POST['location'];
+			
+			$query = "insert into donation values (?, ?, ?)";
+			$stmt = $dbh->prepare($query);
+			$stmt->bind_param($user, $organization, $location);
+			$stmt->execute();
+			
+			$title = $_POST['title'];
+			$author = $_POST['author'];
+			$ISBN = $_POST['ISBN'];
+			$donation_id = $dbh->query('select id, username, from donation where username = :username');
+			
+			$query = "insert into books values (?, ?, ?, ?)";
+			$stmt = $dbh->prepare($query);
+			$stmt->bind_param($ISBN, $title, $author, $donation_ID);
+			$stmt->execute();
+			
+			$book_added = true;
+		} catch (PDOException $e) {
+			$error = "Book was not added: " . $e->getMessage();
+		}
+	} else {
+		$error = "Error connecting to db";
+	}
+} ?>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
@@ -14,19 +58,81 @@
 <div id="container">
 	<?php include "includes/header.inc.php" ?>
 	<div id="main" role="main">
-		<form>
-      <label for="cause">Cause</label><input type="text" name="cause" id="cause" />
-      <label for="ISBN">ISBN</label><input type="text" name="ISBN" id="ISBN" />
-      <label for="title">Title</label><input type="text" name="title" id="title" />
-      <label for="author">Author</label><input type="text" name="author" id="author" />
-      <label for="donor">Donor</label><input type="text" name="donor" id="donor" />
-      <label for="email">Email</label><input type="text" name="email" id="email" />
-      <label for="emailReceipt">Email Receipt</label><input type="checkbox" name="emailReceipt" id="emailReceipt"/>
-      <label for="value">Value</label><input type="text" name="value" id="value" />
-      <label for="status">Status</label><input type="text" name="status" id="status" />
-      <label for="forSale">For Sale?</label><input type="text" name="forSale" id="forSale" />
-      <label for="location">Location</label><input type="text" name="location" id="location" />
-    </form>
+		<form action='addbook.php' method='post'>
+			<fieldset>
+				<legend>Book Description</legend>
+				<table>							
+					<tr>
+						<td>
+							<label for="title">Title:&nbsp;</label>
+						</td>
+						<td>
+							<input type="title" name="title" id="title" placeholder='Title' required maxlength='255' <?php if( isset($_POST['title']) ) { printf( "value='%s'", $_POST['title']); } ?>/>
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							<label for="author">Author:&nbsp; </label>
+						</td>
+						<td>
+							<input type="author" name="author" id="author" placeholder='Author' required maxlength='255' <?php if( isset($_POST['author']) ) { printf( "value='%s'", $_POST['author']); } ?>/>
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							<label for="ISBN">ISBN:&nbsp;</label>
+						</td>
+						<td>
+							<input type="ISBN" name="ISBN" id="ISBN" placeholder="ISBN" required maxlength='13' <?php if( isset($_POST['ISBN']) ) { printf( "value='%i'", $_POST['ISBN']); } ?> />
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							<label for="organization">Organization:&nbsp;</label>
+						</td>
+						<td>
+							<select name="organization" id="organization">
+								<?php 
+									if( $dbh = open_db() ) {
+										$organizations = $dbh->query('select * from organizations');
+										while( $organization = $organizations->fetch() ) {
+											printf( "\t\t\t\t\t\t\t\t<option value='%s' %s>%s</option>\n", 
+											$organization['id'], 
+											(isset( $_POST['organization'] ) && $_POST['organization'] == $organization['id'] ) ? "selected" : "",
+											$organization['name']);
+										}
+									}
+								?>
+							</select>
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							<label for="location">Location:&nbsp; </label>
+						</td>
+						<td>
+							<input type="location" name="location" id="location" placeholder='Location' required maxlength='255' <?php if( isset($_POST['location']) ) { printf( "value='%s'", $_POST['location']); } ?>/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label for="receipt">Email Receipt:&nbsp; </label>
+						</td>
+						<td>
+							<input type="checkbox" name="receipt" id="receipt" value="yes" <?php if( isset($_POST['receipt']) ) { printf( "value='%s'", $_POST['receipt']); } ?>/>
+						</td>
+					</tr>
+					
+				</table>
+				<p>
+					<input type="Submit" value="Add Book" />
+				</p>
+			</fieldset>
+		</form>
 	</div>
 	<?php include "includes/footer.inc.php" ?>
 </div> <!--! end of #container -->

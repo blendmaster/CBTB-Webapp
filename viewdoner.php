@@ -1,7 +1,7 @@
 <?php 
 require_once "includes/db.inc.php";
-$dbh = open_db()
-$ID = $_SESSION['id']
+$dbh = open_db();
+$ID = $_SESSION['id'];
 $UserData = $dbh->query("SELECT * FROM users WHERE id = :ID");
 
 ?>
@@ -30,7 +30,7 @@ $UserData = $dbh->query("SELECT * FROM users WHERE id = :ID");
 		<td>User</td><td>Organization</td><td>Email</td>
 		</tr>
 		<tr>
-		<td>dfg</td><td>Bob</td><td>Dictionary</td>
+		<td><?php echo $UserData['UserName'] </td><td>echo $UserData['Organization']</td><td>echo $UserData['email']?></td>
 		</tr>
 
 		</table>
