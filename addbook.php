@@ -15,7 +15,7 @@ if( count($_POST) > 0 ) {
 		$error = "Please enter a valid organization";
 	} elseif ($dbh = open_db() ) {
 		try{
-			$user = $_SESSION['username'];
+			$username = $_SESSION['username'];
 			$organization = $_POST['organization'];
 			$location = $_POST['location'];
 			
