@@ -6,6 +6,22 @@
 	
 	$error = false;
 	
+	class donation{
+	  public $user;
+	  public $organization;
+	  public $location;
+	  
+	  function __construct($u,$o,$l) {
+	    $this->user = $n;
+	    $this->organization = $o;
+	    $this->location = $l;
+	  }
+	  
+	}
+	
+	$test = new donation('one', 'two', 'three');
+	echo $test->user;
+	
 	if( count($_POST) > 0 and 
 	  $username = $_POST['username'] and
 		$password = $_POST['password'] ) {
