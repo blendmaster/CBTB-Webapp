@@ -5,7 +5,11 @@ $error = false;
 if( count($_POST) > 0 ) {
 	if( !isset($_POST['title']) ) {
 		$error = "Please enter a book title";
+<<<<<<< HEAD
+	} elseif( !isset($_POST['author']) || !preg_match( '/^[a-zA-Z]+\s[a-zA-Z]+$/', $_POST['author'] ) ) {
+=======
 	} elseif( !isset($_POST['author']) || !preg_match( '/^[a-zA-Z]+\s[a-zA-z]+$/', $_POST['author'] ) ) {
+>>>>>>> 7db17ebabf80d5229eaa695d2cb9dc7140cdc991
 		$error = "The author name must be first and last and cannot contain special characters";
 	} elseif( !isset($_POST['ISBN']) || strlen( $_POST['ISBN'] ) < 10 || strlen( $_POST['ISBN'] ) > 13) {
 		$error = "Please enter a valid ISBN";
@@ -19,20 +23,23 @@ if( count($_POST) > 0 ) {
 			$organization = $_POST['organization'];
 			$location = $_POST['location'];
 			
-			$query = "insert into donation values (?, ?, ?)";
-			$stmt = $dbh->prepare($query);
-			$stmt->bind_param($user, $organization, $location);
-			$stmt->execute();
+			$stmt = $dbh->prepare("insert into users (username, organization, location) values (:username, :organization, :location)");
+		
+			$stmt->execute(array( ":username" => $_POST['username'],
+								  ":location" => $_POST['location'],
+								  ":organization" => $_POST['organization']));
 			
 			$title = $_POST['title'];
 			$author = $_POST['author'];
 			$ISBN = $_POST['ISBN'];
 			$donation_id = $dbh->query('select id, username, from donation where username = :username');
 			
-			$query = "insert into books values (?, ?, ?, ?)";
-			$stmt = $dbh->prepare($query);
-			$stmt->bind_param($ISBN, $title, $author, $donation_ID);
-			$stmt->execute();
+			$stmt = $dbh->prepare("insert into books (ISBN, title, author, donation_id) values (:ISBN, :title, :author, :donation_ID)");
+		
+			$stmt->execute(array( ":ISBN" => $ISBN,
+								  ":title" => $title,
+								  ":author" => $author,
+								  ":donation_id" => $donation_id));
 			
 			$book_added = true;
 		} catch (PDOException $e) {
