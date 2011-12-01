@@ -34,7 +34,7 @@ if( count($_POST) > 0 ) {
 			$stmt->bind_param($ISBN, $title, $author, $donation_ID);
 			$stmt->execute();
 			
-			if( isset($_POST['receipt'] == 'yes' )
+			if( isset($_POST['receipt'] && $_POST['receipt'] == 'yes' )
 			{
 				$to = $_SESSION['username']
 			}
