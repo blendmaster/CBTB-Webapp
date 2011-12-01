@@ -38,3 +38,8 @@
 <?php include "includes/scripts.inc.php" ?>
 </body>
 </html>
+
+
+require_once "includes/db.inc.php";
+$dbh = open_db()
+$UserData = $dbh->query('select * from organizations');
