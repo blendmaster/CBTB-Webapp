@@ -45,6 +45,7 @@ if( count($_POST) > 0 ) {
 	} else {
 		$error = "Error connecting to db";
 	}
+	if($error) echo $error;
 } ?>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
