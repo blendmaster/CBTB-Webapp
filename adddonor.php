@@ -1,3 +1,32 @@
+<?php 
+  require_once "includes/db.inc.php";
+  $book_added = false;
+  $error = false;
+  if(count($_POST) > 0 ) {
+	  if(!isset($_POST['donor'])) {
+		  $error = "Please enter a valid donor name";
+    } elseif(!isset($_POST['email']) || !filter_var($_POST['email'])) {
+		  $error = "Please enter a valid email address";
+	  } elseif($dbh = open_db()) {
+		  try{
+			  $donor = $_POST['donor'];
+			  $email = $_POST['email'];
+			
+			  $stmt = $dbh->prepare("insert into donors (donor, email) values (:donor, :email)");
+		
+			  $stmt->execute(array(":donor" => $donor,
+								    ":email" => $email));
+			
+			  $book_added = true;
+		  } catch (PDOException $e) {
+			  $error = "Donor was not added: " . $e->getMessage();
+		  }
+	  } else {
+		  $error = "Error connecting to db";
+	  }
+	  if($error) 	echo $error;
+  } 
+?>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
