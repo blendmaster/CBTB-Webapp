@@ -43,9 +43,17 @@
 <div id="container">
 	<?php include "includes/header.inc.php" ?>
 	<div id="main" role="main">
-		<form>
-      <label for="donor">Donor</label><input type="text" name="donor" id="donor" />
-      <label for="email">Email</label><input type="text" name="email" id="email" />
+		<form action='adddonor.php' method='post'>
+		  <table>
+		    <tr>
+		      <td><label for="donor">Donor:&nbsp;</label></td>
+		      <td><input type="text" name="donor" id="donor" /></td>
+		    </tr>
+		    <tr>
+		      <td><label for="email">Email:&nbsp;</label></td>
+		      <td><input type="text" name="email" id="email" /></td>
+		    </tr>
+		  </table>
     </form>
 	</div>
 	<?php include "includes/footer.inc.php" ?>
