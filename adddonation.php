@@ -11,7 +11,7 @@
       $error = "Pleae enter a valid location";
 	  } elseif($dbh = open_db()) {
 		  try{
-			  $donator = $_POST['donator'];
+			  $donator = $_POST['donor'];
 			  $organization = $_POST['organization'];
 			  $location = $_POST['location'];
 			
@@ -88,9 +88,7 @@
 						</td>
 					</tr>
 				</table>
-				<p>
-					<input type="Submit" value="Add Donation" />
-				</p>
+			  <input type="Submit" value="Add Donation" />
 			</fieldset>
 		</form>
 	</div>
