@@ -15,27 +15,15 @@ if( count($_POST) > 0 ) {
 		$error = "Please enter a valid organization";
 	} elseif ($dbh = open_db() ) {
 		try{
-			$username = $_SESSION['username'];
-			$organization = $_POST['organization'];
-			$location = $_POST['location'];
-			
-			$stmt = $dbh->prepare("insert into users (username, organization, location) values (:username, :organization, :location)");
-		
-			$stmt->execute(array( ":username" => $_POST['username'],
-								  ":location" => $_POST['location'],
-								  ":organization" => $_POST['organization']));
-			
 			$title = $_POST['title'];
 			$author = $_POST['author'];
 			$ISBN = $_POST['ISBN'];
-			$donation_id = $dbh->query('select id, username, from donation where username = :username');
 			
-			$stmt = $dbh->prepare("insert into books (ISBN, title, author, donation_id) values (:ISBN, :title, :author, :donation_ID)");
+			$stmt = $dbh->prepare("insert into books (ISBN, title, author) values (:ISBN, :title, :author)");
 		
 			$stmt->execute(array( ":ISBN" => $ISBN,
 								  ":title" => $title,
-								  ":author" => $author,
-								  ":donation_id" => $donation_id));
+								  ":author" => $author));
 			
 			$book_added = true;
 		} catch (PDOException $e) {
@@ -44,7 +32,7 @@ if( count($_POST) > 0 ) {
 	} else {
 		$error = "Error connecting to db";
 	}
-	if($error) echo $error;
+	if($error) 	echo $error;
 } ?>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
@@ -90,36 +78,6 @@ if( count($_POST) > 0 ) {
 						</td>
 						<td>
 							<input type="ISBN" name="ISBN" id="ISBN" placeholder="ISBN" required maxlength='13' <?php if( isset($_POST['ISBN']) ) { printf( "value='%s'", $_POST['ISBN']); } ?> />
-						</td>
-					</tr>
-					
-					<tr>
-						<td>
-							<label for="organization">Organization:&nbsp;</label>
-						</td>
-						<td>
-							<select name="organization" id="organization">
-								<?php 
-									if( $dbh = open_db() ) {
-										$organizations = $dbh->query('select * from organizations');
-										while( $organization = $organizations->fetch() ) {
-											printf( "\t\t\t\t\t\t\t\t<option value='%s' %s>%s</option>\n", 
-											$organization['id'], 
-											(isset( $_POST['organization'] ) && $_POST['organization'] == $organization['id'] ) ? "selected" : "",
-											$organization['name']);
-										}
-									}
-								?>
-							</select>
-						</td>
-					</tr>
-					
-					<tr>
-						<td>
-							<label for="location">Location:&nbsp; </label>
-						</td>
-						<td>
-							<input type="location" name="location" id="location" placeholder='Location' required maxlength='255' <?php if( isset($_POST['location']) ) { printf( "value='%s'", $_POST['location']); } ?>/>
 						</td>
 					</tr>
 					<tr>
