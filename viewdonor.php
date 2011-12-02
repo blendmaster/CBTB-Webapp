@@ -1,4 +1,12 @@
-<?php require_once "includes/db.inc.php"; ?>
+<?php 
+require_once "includes/db.inc.php";
+$dbh = open_db();
+$ID = 6;//$_SESSION['id'];
+$UserData = $dbh->query('SELECT * FROM users');
+//$UserName = $UserData['username']; 
+?>
+
+
 
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
@@ -20,35 +28,35 @@
 		<h2> Viewing current doners </h2>
 		
 		<table border = "1">
-		  <th>
-		    <td>User</td><td>Organization</td><td>Email</td>
-		  </th>
-		  <?php 
-		    $error = false;
-        if(count($_POST) > 0 ) {
-	        if($dbh = open_db()) {
-		        try{
-			        $donors = $dbh->prepare('select donor, email from donators');
-			        $donors->setFetchMode(PDO::FETCH_ASSOC);
-				      $donors->execute(array(":username" => $username));
-			
-			        while($row = $donors->fetch()) {
-			          ?>
-			            <tr>
-			              <td><?php echo $row['donor'];?></td>
-			              <td><?php echo $row['email'];?></td>
-			            </tr>
-			          <?php
-			        }
-			      } catch (PDOException $e) {
-				      $error = 'Connection failed: ' . $e->getMessage();
-			      }	
-		      } else {
-			      $error = "Error connecting to db";
-		      }
-	      }
-      ?>
-		</table>
+		<tr>
+		<td>User</td><td>Organization</td><td>Email</td>
+		</tr>
+		<?php while ($User = $UserData-> fetch()){ 
+		
+		switch ($User['organization']){
+			case 1:
+				$Org = "NERV";
+				break;
+			case 2:
+				$Org = "SERN";
+				break;
+			case 3:
+				$Org = "SOS Brigade";
+				break;
+			case 4:
+				$Org = "Academy City - Judgement";
+				break;
+			case 5:
+				$Org = "Light Music Club";
+				break;
+		}
+		
+		echo '<tr><td>',
+		$User['username'], '</td><td>', $Org, '</td><td>', $User['email'], '</td>';
+		
+		} 
+		echo '</table>';
+		?>
 		
 	</div>
 	<?php include "includes/footer.inc.php" ?>
