@@ -30,7 +30,6 @@
 		        try{
 			        $donors = $dbh->prepare('select donor, email from donors');
 			        $donors->setFetchMode(PDO::FETCH_ASSOC);
-				      $donors->execute(array(":username" => $username));
 			
 			        while($row = $donors->fetch()) {
 			          ?>
