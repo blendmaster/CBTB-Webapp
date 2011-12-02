@@ -15,7 +15,7 @@
 			  $organization = $_POST['organization'];
 			  $location = $_POST['location'];
 			
-			  $stmt = $dbh->prepare("insert into donation (donator, organization, location) values (:donator, :organization, :location)");
+			  $stmt = $dbh->prepare("insert into donations (donator, organization, location) values (:donator, :organization, :location)");
 		
 			  $stmt->execute(array( ":donator" => $donator,
 								    ":organization" => $organization,
