@@ -54,6 +54,7 @@
 		      <td><input type="text" name="email" id="email" /></td>
 		    </tr>
 		  </table>
+		  <input type="Submit" value="Add Book" />
     </form>
 	</div>
 	<?php include "includes/footer.inc.php" ?>
