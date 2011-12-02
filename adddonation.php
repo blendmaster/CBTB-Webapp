@@ -7,7 +7,7 @@
 		  $error = "Please enter a donator";
 	  } elseif(!isset($_POST['organization'])) {
 		  $error = "Please enter a valid organization";
-    } elseif(!issset($_POST['location'])) {
+    } elseif(!isset($_POST['location'])) {
       $error = "Pleae enter a valid location";
 	  } elseif($dbh = open_db()) {
 		  try{
