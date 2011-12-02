@@ -1,34 +1,35 @@
 <?php 
   require_once "includes/db.inc.php";
-  require_once "includes/PasswordHash.php";
-  require_once "includes/session.inc.php";
-  $donation_created = false;
+  $donation_added = false;
   $error = false;
-  if( count($_POST) > 0 ) {
-    if(!isset($_POST['donator'])) {
-      $error = "Please enter a valid donator";
-    } elseif(!isset($_POST['location'])) {
-      $error = "Please enter a valid location";
-    } elseif ( !isset($_POST['organization']) )  {
+  if(count($_POST) > 0) {
+	  if(!isset($_POST['donator'])) {
+		  $error = "Please enter a donator";
+	  } elseif(!isset($_POST['organization'])) {
 		  $error = "Please enter a valid organization";
-	  } elseif ($dbh = open_db() ) {
-		  try{ 
-			  $stmt = $dbh->prepare("insert into donation (donator, organization, location) values (:user, :organization, :location)");
-		    
-		    $data = array( ":donator" => $_POST['donator'],
-								    ":email" => $_POST['email'],
-								    ":organization" => $_POST['organization']);
-			  $stmt->execute($data);
-			  var_dump($data);
-			  $donation_created = true;
+    } elseif(!issset($_POST['location'])) {
+      $error = "Pleae enter a valid location";
+	  } elseif($dbh = open_db()) {
+		  try{
+			  $donator = $_POST['donator'];
+			  $organization = $_POST['organization'];
+			  $location = $_POST['location'];
+			
+			  $stmt = $dbh->prepare("insert into donation (donator, organization, location) values (:donator, :organization, :location)");
+		
+			  $stmt->execute(array( ":donator" => $donator,
+								    ":organization" => $organization,
+								    ":location" => $location));
+			
+			  $donation_added = true;
 		  } catch (PDOException $e) {
-			  $error = "Donation could not be created: " . $e->getMessage();
+			  $error = "Donation was not added: " . $e->getMessage();
 		  }
 	  } else {
 		  $error = "Error connecting to db";
 	  }
-  }
-  if($error) echo $error;
+	  if($error) 	echo $error;
+  } 
 ?>
 
 <!doctype html>
