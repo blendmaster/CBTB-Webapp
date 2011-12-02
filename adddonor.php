@@ -24,7 +24,7 @@
 	  } else {
 		  $error = "Error connecting to db";
 	  }
-	  if($error) 	echo $error;
+	  if($error) echo $error;
   } 
 ?>
 <!doctype html>
