@@ -15,7 +15,7 @@
 				<li><a href="adddonation.php">Add Donation</a></li>
 				<li><a href="books.php">Book Inventory</a></li>
 				<li><a href="logout.php">Logout</a></li>
-				<li><a href="viewdoner.php">View Doners</a></li>
+				<li><a href="viewdonor.php">View Donors</a></li>
 			<?php else: ?>
 				<li><form action="login.php" method="post">
 						<input type="text" id='username' name='username' placeholder='username' />
