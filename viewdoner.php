@@ -1,9 +1,9 @@
 <?php 
 require_once "includes/db.inc.php";
 $dbh = open_db();
-$ID = $_SESSION['id'];
-$UserData = $dbh->query("SELECT * FROM users WHERE id = :ID");
-
+$ID = 6;//$_SESSION['id'];
+$UserData = $dbh->query('SELECT * FROM users');
+//$UserName = $UserData['username']; 
 ?>
 
 
@@ -24,16 +24,39 @@ $UserData = $dbh->query("SELECT * FROM users WHERE id = :ID");
 <div id="container">
 	<?php include "includes/header.inc.php" ?>
 	<div id="main" role="main">
-		<p>Viewing: <?php echo $UserName ?> </p>
-				<table border = "1">
+	
+		<h2> Viewing current doners </h2>
+		
+		<table border = "1">
 		<tr>
 		<td>User</td><td>Organization</td><td>Email</td>
 		</tr>
-		<tr>
-		<td><?php echo $UserData['UserName'] </td><td>echo $UserData['Organization']</td><td>echo $UserData['email']?></td>
-		</tr>
-
-		</table>
+		<?php while ($User = $UserData-> fetch()){ 
+		
+		switch ($User['organization']){
+			case 1:
+				$Org = "NERV";
+				break;
+			case 2:
+				$Org = "SERN";
+				break;
+			case 3:
+				$Org = "SOS Brigade";
+				break;
+			case 4:
+				$Org = "Academy City - Judgement";
+				break;
+			case 5:
+				$Org = "Light Music Club";
+				break;
+		}
+		
+		echo '<tr><td>',
+		$User['username'], '</td><td>', $Org, '</td><td>', $User['email'], '</td>';
+		
+		} 
+		echo '</table>';
+		?>
 		
 	</div>
 	<?php include "includes/footer.inc.php" ?>
