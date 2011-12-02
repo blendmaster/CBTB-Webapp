@@ -28,7 +28,7 @@
         if(count($_POST) > 0 ) {
 	        if($dbh = open_db()) {
 		        try{
-			        $donors = $dbh->prepare('select donor, email from donors');
+			        $donors = $dbh->query('select donor, email from donors');
 			        $donors->setFetchMode(PDO::FETCH_ASSOC);
 			
 			        while($row = $donors->fetch()) {
