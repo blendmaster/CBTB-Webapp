@@ -56,7 +56,7 @@
 							<label for="title">Title:&nbsp;</label>
 						</td>
 						<td>
-							<input type="title" name="title" id="title" placeholder='Title' required maxlength='255' <?php if( isset($_POST['title']) ) { printf( "value='%s'", $_POST['title']); } ?>/>
+							<input type="text" name="title" id="title" placeholder='Title' required maxlength='255' <?php if( isset($_POST['title']) ) { printf( "value='%s'", $_POST['title']); } ?>/>
 						</td>
 					</tr>
 					
@@ -65,7 +65,7 @@
 							<label for="author">Author:&nbsp; </label>
 						</td>
 						<td>
-							<input type="author" name="author" id="author" placeholder='Author' required maxlength='255' <?php if( isset($_POST['author']) ) { printf( "value='%s'", $_POST['author']); } ?>/>
+							<input type="text" name="author" id="author" placeholder='Author' required maxlength='255' <?php if( isset($_POST['author']) ) { printf( "value='%s'", $_POST['author']); } ?>/>
 						</td>
 					</tr>
 					
@@ -74,7 +74,7 @@
 							<label for="ISBN">ISBN:&nbsp;</label>
 						</td>
 						<td>
-							<input type="ISBN" name="ISBN" id="ISBN" placeholder="ISBN" required maxlength='13' <?php if( isset($_POST['ISBN']) ) { printf( "value='%s'", $_POST['ISBN']); } ?> />
+							<input type="text" name="ISBN" id="ISBN" placeholder="ISBN" required maxlength='13' <?php if( isset($_POST['ISBN']) ) { printf( "value='%s'", $_POST['ISBN']); } ?> />
 						</td>
 					</tr>
 					<tr>
