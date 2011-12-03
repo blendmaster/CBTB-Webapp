@@ -1,3 +1,4 @@
+<?php require "includes/loggedin.inc.php" ?>
 <?php 
   require_once "includes/db.inc.php";
   $book_added = false;

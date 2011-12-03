@@ -6,6 +6,10 @@
 	
 	$error = false;
 	
+	#handle redirect errors from the logged_in check
+	#kludgey, like e'rything else here
+	if( isset($_GET['acesserror'] ) ) $error = "You must be logged in to access that page.";
+
 	if( count($_POST) > 0 and 
 	    $username = $_POST['username'] and
 		$password = $_POST['password'] ) {
