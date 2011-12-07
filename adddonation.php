@@ -4,21 +4,21 @@
   $donation_added = false;
   $error = false;
   if(count($_POST) > 0) {
-	  if(!isset($_POST['donator'])) {
-		  $error = "Please enter a donator";
+	  if(!isset($_POST['donor'])) {
+		  $error = "Please enter a donor";
 	  } elseif(!isset($_POST['organization'])) {
 		  $error = "Please enter a valid organization";
     } elseif(!isset($_POST['location'])) {
       $error = "Pleae enter a valid location";
 	  } elseif($dbh = open_db()) {
 		  try{
-			  $donator = $_POST['donor'];
+			  $donor = $_POST['donor'];
 			  $organization = $_POST['organization'];
 			  $location = $_POST['location'];
 			
-			  $stmt = $dbh->prepare("insert into donations (donator, organization, location) values (:donator, :organization, :location)");
+			  $stmt = $dbh->prepare("insert into donations (donor, organization, location) values (:donor, :organization, :location)");
 		
-			  $stmt->execute(array( ":donator" => $donator,
+			  $stmt->execute(array( ":donor" => $donor,
 								    ":organization" => $organization,
 								    ":location" => $location));
 			
@@ -54,10 +54,10 @@
 				<table>	
 					<tr>
 						<td>
-							<label for="donator">Donator:&nbsp;</label>
+							<label for="donor">Donor:&nbsp;</label>
 						</td>
 						<td>
-							<input type="text" name="donator" id="donator" />
+							<input type="text" name="donor" id="donor" />
 						</td>
 					</tr>
           <tr>

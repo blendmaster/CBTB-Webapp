@@ -27,7 +27,7 @@
 		    $error = false;
         if($dbh = open_db()) {
           try{
-            $inventory = $dbh->query('select title, author, ISBN from books');
+            $inventory = $dbh->query('select title, author, ISBN, donation_id from books');
             $inventory->setFetchMode(PDO::FETCH_ASSOC);
     
             while($row = $inventory->fetch()) {
@@ -36,6 +36,25 @@
                   <td><?php echo $row['title'];?></td>
                   <td><?php echo $row['author'];?></td>
                   <td><?php echo $row['ISBN'];?></td>
+                  <?php
+                    try{
+                      $query = 'select donor, location from donations where id = ' . $row['donation_id'];
+                      $donation = $dbh->query($query);
+                      $donation ->setFetchMode(PDO::FETCH_ASSOC);
+                      $theDonation = $inventory->fetch();
+                    }
+                    } catch (PDOException $e) {
+                      $error = 'Connection failed: ' . $e->getMessage();
+                    }
+                    if($error) {
+                      echo '<td>' . $error . '</td><td></td>';
+                    } else {
+                      ?>
+                      <td><?php echo $theDonation['donor'];?></td>
+                      <td><?php echo $theDonation['location'];?></td>
+                      <?php
+                    }
+                  ?>
                 </tr>
               <?php
             }
