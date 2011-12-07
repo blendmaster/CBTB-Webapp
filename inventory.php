@@ -20,9 +20,9 @@
 		<h2>Book Inventory</h2>
 		
 		<table border = "1">
-		  <th>
-		    <td>Title</td><td>Author</td><td>ISBN</td>
-		  </th>
+		    <th>Title</th>
+        <th>Author</th>
+        <th>ISBN</th>
 		  <?php 
 		    $error = false;
         if($dbh = open_db()) {
