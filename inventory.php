@@ -17,7 +17,7 @@
 	<?php include "includes/header.inc.php" ?>
 	<div id="main" role="main">
 	
-		<h2> Viewing current doners </h2>
+		<h2>Book Inventory</h2>
 		
 		<table border = "1">
 		  <th>
@@ -25,28 +25,27 @@
 		  </th>
 		  <?php 
 		    $error = false;
-        if(count($_POST) > 0 ) {
-	        if($dbh = open_db()) {
-		        try{
-			        $inventory = $dbh->query('select ISBN, title, author from books');
-			        $inventory->setFetchMode(PDO::FETCH_ASSOC);
-			
-			        while($row = $inventory->fetch()) {
-			          ?>
-			            <tr>
-			              <td><?php echo $row['title'];?></td>
-			              <td><?php echo $row['author'];?></td>
-			              <td><?php echo $row['ISBN'];?></td>
-			            </tr>
-			          <?php
-			        }
-			      } catch (PDOException $e) {
-				      $error = 'Connection failed: ' . $e->getMessage();
-			      }	
-		      } else {
-			      $error = "Error connecting to db";
-		      }
-	      }
+        if($dbh = open_db()) {
+          try{
+            $inventory = $dbh->query('select ISBN, title, author from books');
+            $inventory->setFetchMode(PDO::FETCH_ASSOC);
+    
+            while($row = $inventory->fetch()) {
+              ?>
+                <tr>
+                  <td><?php echo $row['title'];?></td>
+                  <td><?php echo $row['author'];?></td>
+                  <td><?php echo $row['ISBN'];?></td>
+                </tr>
+              <?php
+            }
+          } catch (PDOException $e) {
+            $error = 'Connection failed: ' . $e->getMessage();
+          }	
+        } else {
+          $error = "Error connecting to db";
+        }
+        if($error) echo $error;
       ?>
 		</table>
 		
