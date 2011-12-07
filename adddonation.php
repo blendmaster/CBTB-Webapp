@@ -107,10 +107,36 @@
 						<td>
 							<input type="text" name="location" id="location" />
 						</td>
-            <td><input type="text" name="title" id="title" /></td>
-            <td><input type="text" name="author" id="author" /></td>
-            <td><input type="text" name="ISBN" id="ISBN" /></td>
-            <td><input type="text" name="price" id="price" /></td>
+          </tr>
+            <td>
+              <label for="title">Title:&nbsp;</label>
+            </td>
+            <td>
+              <input type="text" name="title" id="title" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="author">Author:&nbsp;</label>
+            </td>
+            <td>
+              <input type="text" name="author" id="author" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="ISBN">ISBN:&nbsp;</label>
+            </td>
+            <td>
+              <input type="text" name="ISBN" id="ISBN" />
+            </td>
+          <tr>
+            <td>
+              <label for="price">Price:&nbsp;</label>
+            </td>
+            <td>
+              <input type="text" name="price" id="price" />
+            </td>
 					</tr>
 				</table>
 			  <input type="Submit" value="Add Donation" />
