@@ -27,7 +27,7 @@
 		    $error = false;
         if($dbh = open_db()) {
           try{
-            $inventory = $dbh->query('select ISBN, title, author from books');
+            $inventory = $dbh->query('select title, author, ISBN from books');
             $inventory->setFetchMode(PDO::FETCH_ASSOC);
     
             while($row = $inventory->fetch()) {
