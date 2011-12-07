@@ -28,9 +28,8 @@
         if(count($_POST) > 0 ) {
 	        if($dbh = open_db()) {
 		        try{
-			        $inventory = $dbh->prepare('select ISBN, title, author from books');
+			        $inventory = $dbh->query('select ISBN, title, author from books');
 			        $inventory->setFetchMode(PDO::FETCH_ASSOC);
-				      $inventory->execute(array(":username" => $username));
 			
 			        while($row = $inventory->fetch()) {
 			          ?>
