@@ -15,6 +15,7 @@
 				<li><a href="adddonation.php">Add Donation</a></li>
 				<li><a href="books.php">Book Inventory</a></li>
 				<li><a href="viewdonor.php">View Donors</a></li>
+        <li><a href="inventory.php">View Book Inventory</a></li>
 				<li><a href="logout.php">Logout</a></li>
 			<?php else: ?>
 				<li><form action="login.php" method="post">
