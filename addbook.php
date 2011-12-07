@@ -85,7 +85,7 @@
 							<label for="price">price:&nbsp;</label>
 						</td>
 						<td>
-							<input type="text" name="price" id="price" placeholder="price" required maxlength='13' <?php if( isset($_POST['price']) ) { printf( "value='%s'", $_POST['price']); } ?> />
+							<input type="text" name="price" id="price" placeholder="Price" required maxlength='13' <?php if( isset($_POST['price']) ) { printf( "value='%s'", $_POST['price']); } ?> />
 						</td>
 					</tr>
 					<tr>

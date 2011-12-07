@@ -10,22 +10,42 @@
 		  $error = "Please enter a valid organization";
     } elseif(!isset($_POST['location'])) {
       $error = "Pleae enter a valid location";
+    } elseif(!isset($_POST['title'])) {
+      $error = "Pleae enter a valid title";
+    } elseif(!isset($_POST['author'])) {
+      $error = "Pleae enter a valid author";
+    } elseif(!isset($_POST['ISBN'])) {
+      $error = "Pleae enter a valid ISBN";
+    } elseif(!isset($_POST['price'])) {
+      $error = "Pleae enter a valid price";
 	  } elseif($dbh = open_db()) {
-		  try{
+		  try {
 			  $donor = $_POST['donor'];
 			  $organization = $_POST['organization'];
 			  $location = $_POST['location'];
 			
-			  $stmt = $dbh->prepare("insert into donations (donor, organization, location) values (:donor, :organization, :location)");
+			  $donation = $dbh->prepare("insert into donations (donor, organization, location) values (:donor, :organization, :location)");
 		
-			  $stmt->execute(array( ":donor" => $donor,
+			  $donation->execute(array(":donor" => $donor,
 								    ":organization" => $organization,
 								    ":location" => $location));
-			
+                    
+        $donation_id = $dbh->lastInsertId();
 			  $donation_added = true;
 		  } catch (PDOException $e) {
 			  $error = "Donation was not added: " . $e->getMessage();
 		  }
+      try {
+        $title = $_POST['title'];
+        $author = $_POST['author'];
+        $ISBN = $_POST['ISBN'];
+        $price = $_POST['price'];
+        
+        $book = $dbh->prepare("insert into books (title, author, ISBN, price, donation_id) values (:title, :author, :ISBN, :price, :donation_id)");
+        $book->execute(array(":title"=>$title, ":author"=>$author, ":ISBN"=>$ISBN, ":price"=>$price, ":donation_id" => $donation_id));
+      } catch (PDOException $e) {
+        $error = "Donation was not added: " . $e->getMessage();
+      }
 	  } else {
 		  $error = "Error connecting to db";
 	  }
@@ -87,6 +107,10 @@
 						<td>
 							<input type="text" name="location" id="location" />
 						</td>
+            <td><input type="text" name="title" id="title" /></td>
+            <td><input type="text" name="author" id="author" /></td>
+            <td><input type="text" name="ISBN" id="ISBN" /></td>
+            <td><input type="text" name="price" id="price" /></td>
 					</tr>
 				</table>
 			  <input type="Submit" value="Add Donation" />
