@@ -43,7 +43,7 @@
                       $query = 'select donor, location from donations where id = ' . $row['donation_id'];
                       $donation = $dbh->query($query);
                       $donation ->setFetchMode(PDO::FETCH_ASSOC);
-                      $theDonation = $inventory->fetch();
+                      $theDonation = $donation->fetch();
                     } catch (PDOException $e) {
                       $error = 'Connection failed: ' . $e->getMessage();
                     }
