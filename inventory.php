@@ -23,6 +23,8 @@
 		    <th>Title</th>
         <th>Author</th>
         <th>ISBN</th>
+        <th>Donor</th>
+        <td>Location</th>
 		  <?php 
 		    $error = false;
         if($dbh = open_db()) {
@@ -42,7 +44,6 @@
                       $donation = $dbh->query($query);
                       $donation ->setFetchMode(PDO::FETCH_ASSOC);
                       $theDonation = $inventory->fetch();
-                    }
                     } catch (PDOException $e) {
                       $error = 'Connection failed: ' . $e->getMessage();
                     }
