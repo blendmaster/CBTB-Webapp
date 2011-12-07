@@ -15,12 +15,14 @@
 			  $title = $_POST['title'];
 			  $author = $_POST['author'];
 			  $ISBN = $_POST['ISBN'];
+        $price = $_POST['price'];
 			
-			  $stmt = $dbh->prepare("insert into books (ISBN, title, author) values (:ISBN, :title, :author)");
+			  $stmt = $dbh->prepare("insert into books (ISBN, title, author, price) values (:ISBN, :title, :author, :price)");
 		
 			  $stmt->execute(array( ":ISBN" => $ISBN,
 								    ":title" => $title,
-								    ":author" => $author));
+								    ":author" => $author,
+                    ":price" => $price));
 			
 			  $book_added = true;
 		  } catch (PDOException $e) {
@@ -76,6 +78,14 @@
 						</td>
 						<td>
 							<input type="text" name="ISBN" id="ISBN" placeholder="ISBN" required maxlength='13' <?php if( isset($_POST['ISBN']) ) { printf( "value='%s'", $_POST['ISBN']); } ?> />
+						</td>
+					</tr>
+          <tr>
+						<td>
+							<label for="price">price:&nbsp;</label>
+						</td>
+						<td>
+							<input type="text" name="price" id="price" placeholder="price" required maxlength='13' <?php if( isset($_POST['price']) ) { printf( "value='%s'", $_POST['price']); } ?> />
 						</td>
 					</tr>
 					<tr>
