@@ -34,9 +34,7 @@
             if(isset($_POST['search'])) {
               $query .= " where " . $_POST['criteria'] . " like '%" . $_POST['search'] . "%'";
             }
-            if($_POST['filter']!= "") {
-              $query .= " where author = '" . $_POST['filter'] . "'";
-            }
+
             
             $inventory = $dbh->query($query);
             $inventory->setFetchMode(PDO::FETCH_ASSOC);
@@ -111,6 +109,8 @@
               <option value='ISBN'>ISBN</option>
             </select>
           </td>
+        </tr>
+        <tr>
           <td>
             <label for="search">Order By:&nbsp;</label>
           </td>
