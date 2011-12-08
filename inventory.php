@@ -7,14 +7,14 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
 	<?php include "includes/headmatter.inc.php" ?>
+	<script type="text/javascript" src="/path/to/jquery-1.6.2.min.js.js"></script> 
+	<script type="text/javascript" src="/path/to/jquery.tablesorter.js"></script> 
 	<script type="text/javascript" src="js/inventorySort.js"></script>
 	<title>Compassion by the Book</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
 </head>
 <body>
-
-
 
 <div id="container">
 	<?php include "includes/header.inc.php"; ?>
@@ -23,13 +23,14 @@
 		<h2>Book Inventory</h2>
 		
 		<table border = "1" class="tablesorter" id="inventoryTable">
-		    <th>Title</th>
-        <th>Author</th>
-        <th>ISBN</th>
-        <th>Donor</th>
-        <td>Location</th>
+		<th>Title</th>	<th>Author</th>	<th>ISBN</th>	<th>Donor</th>	<td>Location</th>
 		  <?php 
 		    $error = false;
+			if( !isset($_POST['order']) ) {
+				$order = 'title';
+			} else {
+				$order = $_POST['order'];
+			}
         if($dbh = open_db()) {
           try{
             $query = 'select title, author, ISBN, donation_id from books';
