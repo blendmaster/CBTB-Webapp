@@ -74,6 +74,21 @@
 		</table>
 		<form action='inventory.php' method='post'>
 			<table>
+        <tr>
+          <td>
+            <label for="filter">Filter by Author:&nbsp;</label>
+          </td>
+          <td>
+            <?php 
+              if( $dbh = open_db() ) {
+                $authors = $dbh->query('select * from books');
+                while( $author = $authors->fetch() ) {
+                  echo '<option value="' . $author['author'] . '">' . $author['author'] . '</option>';
+                }
+              }
+            ?>
+          </td>
+        </tr>
 				<tr>
 					<td>
             <label for="search">Search:&nbsp;</label>
