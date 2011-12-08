@@ -7,9 +7,6 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
 	<?php include "includes/headmatter.inc.php" ?>
-	<script type="text/javascript" src="js/libs/jquery-1.6.2.min.js"></script> 
-	<script type="text/javascript" src="js/libs/jquery.tablesorter.js"></script> 
-	<script type="text/javascript" src="js/inventorySort.js"></script>
 	<title>Compassion by the Book</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -22,11 +19,8 @@
 	
 		<h2>Book Inventory</h2>
 		
-		<table border = "1" class="tablesorter" id="inventoryTable">
-		<thead>
+		<table border = "1" id="inventoryTable">
 		<th>Title</th>	<th>Author</th>	<th>ISBN</th>	<th>Donor</th>	<td>Location</th>
-		</thead>
-		<tbody>
 		  <?php 
 		    $error = false;
 			if( !isset($_POST['order']) ) {
@@ -93,7 +87,6 @@
         }
         if($error) echo $error;
       ?>
-		</tbody>
 		</table>
 		<form action='inventory.php' method='post'>
 			<table>
