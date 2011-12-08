@@ -31,7 +31,7 @@
           try{
             $query = 'select title, author, ISBN, donation_id from books';
             if(isset($_POST['search'])) {
-              $query .= " where title = '" . $_POST['search'] . "'";
+              $query .= " where title like '" . $_POST['search'] . "'";
             }
             $inventory = $dbh->query($query);
             $inventory->setFetchMode(PDO::FETCH_ASSOC);
