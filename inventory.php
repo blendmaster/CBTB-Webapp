@@ -33,6 +33,7 @@
             if(isset($_POST['search'])) {
               $query .= " where " . $_POST['criteria'] . " like '%" . $_POST['search'] . "%'";
             }
+            if(isset($_POST['search']) && isset($_POST['filter'])) $query .= " and ";
             if(isset($_POST['filter'])) {
               $query .= " where author = '" . $_POST['filter'] . "'";
             }
