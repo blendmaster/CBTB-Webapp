@@ -7,8 +7,8 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
 	<?php include "includes/headmatter.inc.php" ?>
-	<script type="text/javascript" src="/path/to/jquery-1.6.2.min.js.js"></script> 
-	<script type="text/javascript" src="/path/to/jquery.tablesorter.js"></script> 
+	<script type="text/javascript" src="/js/lib/jquery-1.6.2.min.js.js"></script> 
+	<script type="text/javascript" src="/js/lib/jquery.tablesorter.js"></script> 
 	<script type="text/javascript" src="js/inventorySort.js"></script>
 	<title>Compassion by the Book</title>
 	<meta name="description" content="">
