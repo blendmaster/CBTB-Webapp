@@ -31,7 +31,7 @@
           try{
             $query = 'select title, author, ISBN, donation_id from books';
             if(isset($_POST['search'])) {
-              $query .= " where title like '%" . $_POST['search'] . "%'";
+              $query .= " where " . $_POST['criteria'] . " like '%" . $_POST['search'] . "%'";
             }
             $inventory = $dbh->query($query);
             $inventory->setFetchMode(PDO::FETCH_ASSOC);
@@ -76,11 +76,18 @@
 			<table>
 				<tr>
 					<td>
-							<label for="search">Search:&nbsp;</label>
-						</td>
-						<td>
-							<input type="search" name="search" id="search" placeholder='Title' required maxlength='255' <?php if( isset($_POST['search']) ) { printf( "value='%s'", $_POST['search']); } ?>/>
-						</td>
+            <label for="search">Search:&nbsp;</label>
+          </td>
+          <td>
+            <input type="search" name="search" id="search" placeholder='Title' required maxlength='255' <?php if( isset($_POST['search']) ) { printf( "value='%s'", $_POST['search']); } ?>/>
+          </td>
+          <td>
+            <select name="criteria" id="criteria">
+              <option value='title'>Title</option>
+              <option value='author'>Author</option>
+              <option value='donor'>Donor</option>
+            </select>
+          </td>
 				</tr>
 			</table>
       <input type="Submit" value="Search" />
