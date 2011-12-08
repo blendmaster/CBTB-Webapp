@@ -37,9 +37,9 @@
             if(isset($_POST['search'])) {
               $query .= " where " . $_POST['criteria'] . " like '%" . $_POST['search'] . "%'";
             }
-            /*if(isset($_POST['search']) && ($_POST['daFilter'] != 'NULL')) $query .= " and";
-            if(!isset($_POST['search']) && ($_POST['daFilter'] != 'NULL')) $query .= " where";
-            if(($_POST['daFilter'] != 'NULL')) {
+            /*if(isset($_POST['search']) && ($_POST['daFilter'] != "none") && isset($_POST['daFilter'])) $query .= " and";
+            if(!isset($_POST['search']) && ($_POST['daFilter'] != "none") && isset($_POST['daFilter'])) $query .= " where";
+            if(($_POST['daFilter'] != "none" && isset($_POST['daFilter']))) {
               $query .= " author = '" . $_POST['daFilter'] . "'";
             }
             if(!isset($_POST['order'])) {
@@ -110,7 +110,7 @@
           </td>
           <td>
             <select name="daFilter" id="daFilter">
-              <option value=NULL>---</option>
+              <option value="none">---</option>
               <?php 
                 if( $dbh = open_db() ) {
                   $authors = $dbh->query('select * from books');
