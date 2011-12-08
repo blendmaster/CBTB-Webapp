@@ -40,6 +40,7 @@
               $query .= " author = '" . $_POST['daFilter'] . "'";
             }
             $query .= " ORDER BY " . $_POST['daSort'];
+            echo $_POST['daSort'];
             echo $query;
             
             $inventory = $dbh->query($query);
