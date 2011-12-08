@@ -7,8 +7,8 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
 	<?php include "includes/headmatter.inc.php" ?>
-	<script type="text/javascript" src="/js/lib/jquery-1.6.2.min.js.js"></script> 
-	<script type="text/javascript" src="/js/lib/jquery.tablesorter.js"></script> 
+	<script type="text/javascript" src="js/libs/jquery-1.6.2.min.js"></script> 
+	<script type="text/javascript" src="js/libs/jquery.tablesorter.js"></script> 
 	<script type="text/javascript" src="js/inventorySort.js"></script>
 	<title>Compassion by the Book</title>
 	<meta name="description" content="">
@@ -23,7 +23,10 @@
 		<h2>Book Inventory</h2>
 		
 		<table border = "1" class="tablesorter" id="inventoryTable">
+		<thead>
 		<th>Title</th>	<th>Author</th>	<th>ISBN</th>	<th>Donor</th>	<td>Location</th>
+		</thead>
+		<tbody>
 		  <?php 
 		    $error = false;
 			if( !isset($_POST['order']) ) {
@@ -54,7 +57,6 @@
             
             $inventory = $dbh->query($query);
             $inventory->setFetchMode(PDO::FETCH_ASSOC);
-    
             while($row = $inventory->fetch()) {
               ?>
                 <tr>
@@ -82,6 +84,7 @@
                 </tr>
               <?php
             }
+			
           } catch (PDOException $e) {
             $error = 'Connection failed: ' . $e->getMessage();
           }	
@@ -90,6 +93,7 @@
         }
         if($error) echo $error;
       ?>
+		</tbody>
 		</table>
 		<form action='inventory.php' method='post'>
 			<table>
