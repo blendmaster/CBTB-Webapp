@@ -122,7 +122,7 @@
         </tr>
         <tr>
 					<td>
-            <label for="sorting">Search:&nbsp;</label>
+            <label for="sorting">Sort By:&nbsp;</label>
           </td>
           <td>
             <select name="sorting" id="sorting">
