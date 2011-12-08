@@ -43,14 +43,12 @@
             if(isset($_POST['search'])) {
               $query .= " where " . $_POST['criteria'] . " like '%" . $_POST['search'] . "%'";
             }
-            if(isset($_POST['search']) && ($_POST['daFilter'] != NULL)) $query .= " and";
-            if(!isset($_POST['search']) && ($_POST['daFilter'] != NULL)) $query .= " where";
-            if(($_POST['daFilter'] != NULL)) {
+            if(isset($_POST['search']) && ($_POST['daFilter'] != 'NULL')) $query .= " and";
+            if(!isset($_POST['search']) && ($_POST['daFilter'] != 'NULL')) $query .= " where";
+            if(($_POST['daFilter'] != 'NULL')) {
               $query .= " author = '" . $_POST['daFilter'] . "'";
             }
             if(isset($_POST['order'])) $query .= " ORDER BY " . $_POST['order'];
-
-            echo "Query(" . $query . ")";
             
             $inventory = $dbh->query($query);
             $inventory->setFetchMode(PDO::FETCH_ASSOC);
@@ -100,6 +98,8 @@
           <td>
             <select name="order" id="order">
             	<option value='title'>Title</option>
+              <option value='author'>Author</option>
+              <option value='ISBN'>ISBN</option>
             </select>
           </td>
         </tr>
