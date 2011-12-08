@@ -19,7 +19,7 @@
 	
 		<h2>Book Inventory</h2>
 		
-		<table border = "1">
+		<table border = "1" class="sortable">
 		    <th>Title</th>
         <th>Author</th>
         <th>ISBN</th>
