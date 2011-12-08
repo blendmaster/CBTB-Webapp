@@ -28,7 +28,7 @@
         <th>Donor</th>
         <td>Location</th>
 		  <?php 
-      echo $_POST['order'];
+      echo $_POST['please'];
 		    $error = false;
         if($dbh = open_db()) {
           try{
@@ -89,10 +89,10 @@
 			<table>
         <tr>
           <td>
-            <label for="order">Order By:&nbsp;</label>
+            <label for="please">Order By:&nbsp;</label>
           </td>
           <td>
-            <select name="order" id="order">
+            <select name="please" id="please">
             	<option value="title">Title</option>
             </select>
           </td>
