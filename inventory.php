@@ -13,8 +13,10 @@
 </head>
 <body>
 
+
+
 <div id="container">
-	<?php include "includes/header.inc.php" ?>
+	<?php include "includes/header.inc.php"; ?>
 	<div id="main" role="main">
 	
 		<h2>Book Inventory</h2>
@@ -26,6 +28,7 @@
         <th>Donor</th>
         <td>Location</th>
 		  <?php 
+      echo ">>>" . $_POST['daSort'];
 		    $error = false;
         if($dbh = open_db()) {
           try{
@@ -40,7 +43,7 @@
               $query .= " author = '" . $_POST['daFilter'] . "'";
             }
             $query .= " ORDER BY " . $_POST['daSort'];
-            echo $_POST['daSort'];
+            
             echo $query;
             
             $inventory = $dbh->query($query);
