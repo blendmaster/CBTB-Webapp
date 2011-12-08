@@ -105,7 +105,7 @@
             <label for="search">Search:&nbsp;</label>
           </td>
           <td>
-            <input type="search" name="search" id="search" placeholder='Search Term' required maxlength='255' <?php if( isset($_POST['search']) ) { printf( "value='%s'", $_POST['search']); } ?>/>
+            <input type="search" name="search" id="search" placeholder='Search Term' maxlength='255' <?php if( isset($_POST['search']) ) { printf( "value='%s'", $_POST['search']); } ?>/>
           </td>
           <td>
             <select name="criteria" id="criteria">
