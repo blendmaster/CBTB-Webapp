@@ -85,7 +85,7 @@
             <select name="criteria" id="criteria">
               <option value='title'>Title</option>
               <option value='author'>Author</option>
-              <option value='donor'>Donor</option>
+              <option value='ISBN'>ISBN</option>
             </select>
           </td>
 				</tr>
