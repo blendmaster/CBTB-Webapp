@@ -39,7 +39,7 @@
             if(isset($_POST['daFilter'])) {
               $query .= " author = '" . $_POST['daFilter'] . "'";
             }
-            $query .= " ORDER BY " . $_POST['sort'];
+            $query .= " ORDER BY " . $_POST['daSort'];
             echo $query;
             
             $inventory = $dbh->query($query);
@@ -118,10 +118,10 @@
         </tr>
         <tr>
           <td>
-            <label for="search">Order By:&nbsp;</label>
+            <label for="daSort">Order By:&nbsp;</label>
           </td>
           <td>
-            <select name="sort" id="sort">
+            <select name="daSort" id="daSort">
               <option value='title'>Title</option>
               <option value='author'>Author</option>
               <option value='ISBN'>ISBN</option>
