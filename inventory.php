@@ -28,7 +28,7 @@
         <th>Donor</th>
         <td>Location</th>
 		  <?php 
-      echo ">>>" . $_POST['sorting'];
+      echo $_POST['order'];
 		    $error = false;
         if($dbh = open_db()) {
           try{
@@ -89,6 +89,16 @@
 			<table>
         <tr>
           <td>
+            <label for="order">Order By:&nbsp;</label>
+          </td>
+          <td>
+            <select name="order" id="order">
+            	<option value="title">Title</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
             <label for="daFilter">Filter by Author:&nbsp;</label>
           </td>
           <td>
@@ -114,18 +124,6 @@
           </td>
           <td>
             <select name="criteria" id="criteria">
-              <option value='title'>Title</option>
-              <option value='author'>Author</option>
-              <option value='ISBN'>ISBN</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-					<td>
-            <label for="sorting">Sort By:&nbsp;</label>
-          </td>
-          <td>
-            <select name="sorting" id="sorting">
               <option value='title'>Title</option>
               <option value='author'>Author</option>
               <option value='ISBN'>ISBN</option>
