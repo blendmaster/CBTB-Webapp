@@ -68,7 +68,18 @@
         if($error) echo $error;
       ?>
 		</table>
-		
+		<form action='register.php' method='post'>
+			<table>
+				<tr>
+					<td>
+							<label for="search">Search:&nbsp;</label>
+						</td>
+						<td>
+							<input type="search" name="search" id="search" placeholder='Title' required maxlength='255' <?php if( isset($_POST['search']) ) { printf( "value='%s'", $_POST['search']); } ?>/>
+						</td>
+				</tr>
+			</table>
+		</form>
 	</div>
 	<?php include "includes/footer.inc.php" ?>
 </div> <!--! end of #container -->
