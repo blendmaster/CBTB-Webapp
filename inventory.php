@@ -43,6 +43,7 @@
             }
             if(isset($_POST['order'])) $query .= " ORDER BY " . $_POST['order'];
 
+            echo "Query(" . $query . ")";
             
             $inventory = $dbh->query($query);
             $inventory->setFetchMode(PDO::FETCH_ASSOC);
