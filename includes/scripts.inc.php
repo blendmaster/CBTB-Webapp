@@ -6,7 +6,6 @@
 <script src="js/script.js"></script>
 <script src="js/libs/jquery.formalize.js"></script>
 <script src="js/libs/webshim/polyfiller.js"></script>
-<script src="js/libs/jquery.tablesorter.min.js"></script>
 <script>
 //thank you based polyfill
 if(!Modernizr.input.placeholder || !Modernizr.input.autofocus || !Modernizr.inputtypes.email ){
