@@ -7,6 +7,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
 	<?php include "includes/headmatter.inc.php" ?>
+	<script type="text/javascript" src="js/libs/inventorySort.js></script>
 	<title>Compassion by the Book</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
