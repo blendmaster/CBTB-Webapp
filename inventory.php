@@ -47,8 +47,12 @@
             if(!isset($_POST['search']) && ($_POST['daFilter'] != 'NULL')) $query .= " where";
             if(($_POST['daFilter'] != 'NULL')) {
               $query .= " author = '" . $_POST['daFilter'] . "'";
+            } else {
+            if(isset($_POST['order'])) {
+              $query .= " ORDER BY " . $_POST['order'];
+            } else {
+              $query .= " ORDER BY title";
             }
-            if(isset($_POST['order'])) $query .= " ORDER BY " . $_POST['order'];
             
             $inventory = $dbh->query($query);
             $inventory->setFetchMode(PDO::FETCH_ASSOC);
