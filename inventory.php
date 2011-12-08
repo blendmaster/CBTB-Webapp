@@ -30,6 +30,7 @@
         if($dbh = open_db()) {
           try{
             $query = 'select title, author, ISBN, donation_id from books';
+            $query .= " order by " . $_POST['sort'];
             if(isset($_POST['search'])) {
               $query .= " where " . $_POST['criteria'] . " like '%" . $_POST['search'] . "%'";
             }
@@ -103,7 +104,7 @@
             <label for="search">Search:&nbsp;</label>
           </td>
           <td>
-            <input type="search" name="search" id="search" placeholder='Title' required maxlength='255' <?php if( isset($_POST['search']) ) { printf( "value='%s'", $_POST['search']); } ?>/>
+            <input type="search" name="search" id="search" placeholder='Search Term' required maxlength='255' <?php if( isset($_POST['search']) ) { printf( "value='%s'", $_POST['search']); } ?>/>
           </td>
           <td>
             <select name="criteria" id="criteria">
