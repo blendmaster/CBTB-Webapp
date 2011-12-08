@@ -121,8 +121,8 @@
           </td>
         </tr>
         <tr>
-          <td>
-            <label for="sorting">Order By:&nbsp;</label>
+					<td>
+            <label for="sorting">Search:&nbsp;</label>
           </td>
           <td>
             <select name="sorting" id="sorting">
@@ -131,7 +131,7 @@
               <option value='ISBN'>ISBN</option>
             </select>
           </td>
-				</tr>
+        </tr>
 			</table>
       <input type="Submit" value="Search" />
 		</form>
