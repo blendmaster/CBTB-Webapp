@@ -21,7 +21,7 @@
 	
 		<h2>Book Inventory</h2>
 		
-		<table border = "1" class="sortable" id="inventoryTable">
+		<table border = "1" class="tablesorter" id="inventoryTable">
 		    <th>Title</th>
         <th>Author</th>
         <th>ISBN</th>
@@ -138,3 +138,11 @@
 <?php include "includes/scripts.inc.php" ?>
 </body>
 </html>
+
+<script type="text/javascript">
+$(document).ready(function() 
+    { 
+        $("#inventoryTable").tablesorter(); 
+    } 
+); 
+</script>
