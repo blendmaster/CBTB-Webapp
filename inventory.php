@@ -33,9 +33,10 @@
             if(isset($_POST['search'])) {
               $query .= " where " . $_POST['criteria'] . " like '%" . $_POST['search'] . "%'";
             }
-            if(isset($_POST['search']) && isset($_POST['filter'])) $query .= " and ";
-            if(isset($_POST['filter'])) {
-              $query .= " where author = '" . $_POST['filter'] . "'";
+            if(isset($_POST['search']) && ($_POST['filter'] != "---")) $query .= " and";
+            if(!isset($_POST['search']) && ($_POST['filter'] != "---")) $query .= " where";
+            if($_POST['filter'] != "---") {
+              $query .= " author = '" . $_POST['filter'] . "'";
             }
             
             $inventory = $dbh->query($query);
@@ -84,8 +85,8 @@
             <label for="filter">Filter by Author:&nbsp;</label>
           </td>
           <td>
-            <select name="criteria" id="criteria">
-              <option value="">---</option>
+            <select name="filter" id="filter">
+              <option value="---">---</option>
               <?php 
                 if( $dbh = open_db() ) {
                   $authors = $dbh->query('select * from books');
