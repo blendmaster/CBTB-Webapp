@@ -42,7 +42,7 @@
             if(($_POST['daFilter'] != 'NULL')) {
               $query .= " author = '" . $_POST['daFilter'] . "'";
             }
-            if(isset($_POST['order'])) {
+            if(isset($_POST['order'])) { 
               $query .= " ORDER BY " . $_POST['order'];
             } else {
               $query .= " ORDER BY title";
