@@ -39,6 +39,7 @@
               $query .= " author = '" . $_POST['filter'] . "'";
             }
             echo $query;
+            echo $$_POST['filter'];
             
             $inventory = $dbh->query($query);
             $inventory->setFetchMode(PDO::FETCH_ASSOC);
