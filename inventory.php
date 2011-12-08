@@ -34,7 +34,7 @@
               $query .= " where " . $_POST['criteria'] . " like '%" . $_POST['search'] . "%'";
             }
             if(isset($_POST['search']) && isset($_POST['daFilter'])) $query .= " and";
-            if(!isset($_POST['search']) && isset($_POST['daFilter'] != "none")) $query .= " where";
+            if(!isset($_POST['search']) && isset($_POST['daFilter'])) $query .= " where";
             if(isset($_POST['daFilter']) {
               $query .= " author = '" . $_POST['daFilter'] . "'";
             }
