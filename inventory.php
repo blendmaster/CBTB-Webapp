@@ -39,7 +39,7 @@
             if(isset($_POST['daFilter'])) {
               $query .= " author = '" . $_POST['daFilter'] . "'";
             }
-
+            $query .= " ORDER BY " . $_POST['sort'] . " ASC";
             echo $query;
             
             $inventory = $dbh->query($query);
