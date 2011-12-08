@@ -7,6 +7,13 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
 	<?php include "includes/headmatter.inc.php" ?>
+	<script type="text/javascript">
+		$(document).ready(function() 
+			{ 
+				$("#inventoryTable").tablesorter(); 
+			} 
+		); 
+	</script>
 	<title>Compassion by the Book</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -137,11 +144,3 @@
 <?php include "includes/scripts.inc.php" ?>
 </body>
 </html>
-
-<script type="text/javascript">
-$(document).ready(function() 
-    { 
-        $("#inventoryTable").tablesorter(); 
-    } 
-); 
-</script>
