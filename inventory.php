@@ -38,7 +38,7 @@
             if(isset($_POST['search'])) {
               $query .= " where " . $_POST['criteria'] . " like '%" . $_POST['search'] . "%'";
             }
-            /*if(isset($_POST['search']) && ($_POST['daFilter'] != "none") && isset($_POST['daFilter'])) $query .= " and";
+            if(isset($_POST['search']) && ($_POST['daFilter'] != "none") && isset($_POST['daFilter'])) $query .= " and";
             if(!isset($_POST['search']) && ($_POST['daFilter'] != "none") && isset($_POST['daFilter'])) $query .= " where";
             if(($_POST['daFilter'] != "none" && isset($_POST['daFilter']))) {
               $query .= " author = '" . $_POST['daFilter'] . "'";
@@ -49,7 +49,6 @@
               $order = $_POST['order'];
             }
             $query .= " ORDER BY " . $order;
-            */
 
             
             $inventory = $dbh->query($query);
