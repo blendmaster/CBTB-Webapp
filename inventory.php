@@ -28,7 +28,7 @@
         <th>Donor</th>
         <td>Location</th>
 		  <?php 
-      echo ">>>" . $_POST['daSort'];
+      echo ">>>" . $_POST['sorting'];
 		    $error = false;
         if($dbh = open_db()) {
           try{
@@ -42,7 +42,7 @@
             if(isset($_POST['daFilter'])) {
               $query .= " author = '" . $_POST['daFilter'] . "'";
             }
-            $query .= " ORDER BY " . $_POST['daSort'];
+            //$query .= " ORDER BY " . $_POST['daSort'];
             
             echo $query;
             
@@ -122,10 +122,10 @@
         </tr>
         <tr>
           <td>
-            <label for="daSort">Order By:&nbsp;</label>
+            <label for="sorting">Order By:&nbsp;</label>
           </td>
           <td>
-            <select name="daSort" id="daSort">
+            <select name="sorting" id="sorting">
               <option value='title'>Title</option>
               <option value='author'>Author</option>
               <option value='ISBN'>ISBN</option>
