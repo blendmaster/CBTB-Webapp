@@ -102,7 +102,7 @@
           </td>
           <td>
             <select name="daFilter" id="daFilter">
-              <option value="---">---</option>
+              <option value="">---</option>
               <?php 
                 if( $dbh = open_db() ) {
                   $authors = $dbh->query('select * from books');
