@@ -50,8 +50,6 @@
             }
             if(isset($_POST['order'])) {
               $query .= " ORDER BY " . $_POST['order'];
-            } else {
-              $query .= " ORDER BY title";
             }
             
             $inventory = $dbh->query($query);
@@ -113,7 +111,7 @@
           </td>
           <td>
             <select name="daFilter" id="daFilter">
-              <option value=NULL>---</option>
+              <option value='NULL'>---</option>
               <?php 
                 if( $dbh = open_db() ) {
                   $authors = $dbh->query('select * from books');
