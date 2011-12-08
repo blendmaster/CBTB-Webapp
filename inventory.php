@@ -35,7 +35,7 @@
             }
             if(isset($_POST['search']) && isset($_POST['daFilter'])) $query .= " and";
             if(!isset($_POST['search']) && isset($_POST['daFilter'])) $query .= " where";
-            if(isset($_POST['daFilter']) {
+            if(isset($_POST['daFilter'])) {
               $query .= " author = '" . $_POST['daFilter'] . "'";
             }
             echo $query;
