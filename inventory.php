@@ -7,8 +7,8 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
 	<?php include "includes/headmatter.inc.php" ?>
-	<script type="text/javascript" src="js/libs/jquery-1.6.2.min.js.js"></script> 
-	<script type="text/javascript" src="js/libs/jquery.tablesorter.js"></script> 
+	<script type="text/javascript" src="/js/lib/jquery-1.6.2.min.js.js"></script> 
+	<script type="text/javascript" src="/js/lib/jquery.tablesorter.js"></script> 
 	<script type="text/javascript" src="js/inventorySort.js"></script>
 	<title>Compassion by the Book</title>
 	<meta name="description" content="">
@@ -22,7 +22,7 @@
 	
 		<h2>Book Inventory</h2>
 		
-		<table border = "1" class="tablesorter" id="inventoryTable">
+		<table border = "1" id="inventoryTable">
 		<th>Title</th>	<th>Author</th>	<th>ISBN</th>	<th>Donor</th>	<td>Location</th>
 		  <?php 
 		    $error = false;
@@ -38,9 +38,9 @@
             if(isset($_POST['search'])) {
               $query .= " where " . $_POST['criteria'] . " like '%" . $_POST['search'] . "%'";
             }
-            if(isset($_POST['search']) && ($_POST['daFilter'] != "none") && isset($_POST['daFilter'])) $query .= " and";
-            if(!isset($_POST['search']) && ($_POST['daFilter'] != "none") && isset($_POST['daFilter'])) $query .= " where";
-            if(($_POST['daFilter'] != "none" && isset($_POST['daFilter']))) {
+            if(isset($_POST['search']) && ($_POST['daFilter'] != 'NULL')) $query .= " and";
+            if(!isset($_POST['search']) && ($_POST['daFilter'] != 'NULL')) $query .= " where";
+            if(($_POST['daFilter'] != 'NULL')) {
               $query .= " author = '" . $_POST['daFilter'] . "'";
             }
             if(!isset($_POST['order'])) {
@@ -50,7 +50,6 @@
             }
             $query .= " ORDER BY " . $order;
 
-            
             $inventory = $dbh->query($query);
             $inventory->setFetchMode(PDO::FETCH_ASSOC);
     
@@ -110,7 +109,7 @@
           </td>
           <td>
             <select name="daFilter" id="daFilter">
-              <option value="none">---</option>
+              <option value=NULL>---</option>
               <?php 
                 if( $dbh = open_db() ) {
                   $authors = $dbh->query('select * from books');
