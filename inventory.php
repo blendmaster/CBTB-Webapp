@@ -7,13 +7,6 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
 	<?php include "includes/headmatter.inc.php" ?>
-	<script type="text/javascript">
-		$(document).ready(function() 
-			{ 
-				$("#inventoryTable").tablesorter(); 
-			} 
-		); 
-	</script>
 	<title>Compassion by the Book</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -48,7 +41,11 @@
             if(($_POST['daFilter'] != 'NULL')) {
               $query .= " author = '" . $_POST['daFilter'] . "'";
             }
-            if(isset($_POST['order'])) $query .= " ORDER BY " . $_POST['order'];
+            if(isset($_POST['order'])) { 
+              $query .= " ORDER BY " . $_POST['order'];
+            } else {
+              $query .= " ORDER BY title";
+            }
             
             $inventory = $dbh->query($query);
             $inventory->setFetchMode(PDO::FETCH_ASSOC);
