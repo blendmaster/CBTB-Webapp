@@ -41,9 +41,8 @@
             if(isset($_POST['daFilter'])) {
               $query .= " author = '" . $_POST['daFilter'] . "'";
             }
-            //$query .= " ORDER BY " . $_POST['daSort'];
+            if(!isset($_POST['order']) $query .= " ORDER BY " . $_POST['order'];
             
-            echo $query . $_POST['justDoIt'];;
             
             $inventory = $dbh->query($query);
             $inventory->setFetchMode(PDO::FETCH_ASSOC);
@@ -88,11 +87,11 @@
 			<table>
         <tr>
           <td>
-            <label for="justDoIt">Order By:&nbsp;</label>
+            <label for="order">Order By:&nbsp;</label>
           </td>
           <td>
-            <select name="justDoIt" id="justDoIt">
-            	<option value='title'>Title</option>
+            <select name="order" id="order">
+            	<option value='order'>Title</option>
             </select>
           </td>
         </tr>
