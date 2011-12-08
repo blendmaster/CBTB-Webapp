@@ -30,7 +30,7 @@
         if($dbh = open_db()) {
           try{
             $query = 'select title, author, ISBN, donation_id from books';
-            $query .= " ORDER BY " . $_POST['sort'] . " ASC";
+            
             if(isset($_POST['search'])) {
               $query .= " where " . $_POST['criteria'] . " like '%" . $_POST['search'] . "%'";
             }
@@ -39,6 +39,7 @@
             if(isset($_POST['daFilter'])) {
               $query .= " author = '" . $_POST['daFilter'] . "'";
             }
+            $query .= " ORDER BY " . $_POST['sort'] . " ASC";
             echo $query;
             
             $inventory = $dbh->query($query);
