@@ -28,7 +28,6 @@
         <th>Donor</th>
         <td>Location</th>
 		  <?php 
-      echo $_POST['please'];
 		    $error = false;
         if($dbh = open_db()) {
           try{
@@ -44,7 +43,7 @@
             }
             //$query .= " ORDER BY " . $_POST['daSort'];
             
-            echo $query;
+            echo $query . $_POST['justDoIt'];;
             
             $inventory = $dbh->query($query);
             $inventory->setFetchMode(PDO::FETCH_ASSOC);
@@ -89,10 +88,10 @@
 			<table>
         <tr>
           <td>
-            <label for="please">Order By:&nbsp;</label>
+            <label for="justDoIt">Order By:&nbsp;</label>
           </td>
           <td>
-            <select name="please" id="please">
+            <select name="justDoIt" id="justDoIt">
             	<option value='title'>Title</option>
             </select>
           </td>
@@ -131,7 +130,7 @@
           </td>
         </tr>
 			</table>
-      <input type="Submit" value="Search" />
+      <input type="Submit" value="Apply" />
 		</form>
 	</div>
 	<?php include "includes/footer.inc.php" ?>
