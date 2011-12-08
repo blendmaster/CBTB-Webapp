@@ -30,9 +30,14 @@
         if($dbh = open_db()) {
           try{
             $query = 'select title, author, ISBN, donation_id from books';
+            $query .= " order by " . $_POST['sort'];
             if(isset($_POST['search'])) {
               $query .= " where " . $_POST['criteria'] . " like '%" . $_POST['search'] . "%'";
             }
+            if($_POST['filter']!= "") {
+              $query .= " where author = '" . $_POST['filter'] . "'";
+            }
+            
             $inventory = $dbh->query($query);
             $inventory->setFetchMode(PDO::FETCH_ASSOC);
     
@@ -79,14 +84,17 @@
             <label for="filter">Filter by Author:&nbsp;</label>
           </td>
           <td>
-            <?php 
-              if( $dbh = open_db() ) {
-                $authors = $dbh->query('select * from books');
-                while( $author = $authors->fetch() ) {
-                  echo '<option value="' . $author['author'] . '">' . $author['author'] . '</option>';
+            <select name="criteria" id="criteria">
+              <option value="">---</option>
+              <?php 
+                if( $dbh = open_db() ) {
+                  $authors = $dbh->query('select * from books');
+                  while( $author = $authors->fetch() ) {
+                    echo '<option value="' . $author['author'] . '">' . $author['author'] . '</option>';
+                  }
                 }
-              }
-            ?>
+              ?>
+            </select>
           </td>
         </tr>
 				<tr>
@@ -98,6 +106,16 @@
           </td>
           <td>
             <select name="criteria" id="criteria">
+              <option value='title'>Title</option>
+              <option value='author'>Author</option>
+              <option value='ISBN'>ISBN</option>
+            </select>
+          </td>
+          <td>
+            <label for="search">Order By:&nbsp;</label>
+          </td>
+          <td>
+            <select name="sort" id="sort">
               <option value='title'>Title</option>
               <option value='author'>Author</option>
               <option value='ISBN'>ISBN</option>
