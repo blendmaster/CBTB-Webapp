@@ -29,7 +29,11 @@
 		    $error = false;
         if($dbh = open_db()) {
           try{
-            $inventory = $dbh->query('select title, author, ISBN, donation_id from books');
+            $query = 'select title, author, ISBN, donation_id from books';
+            if(isset($_POST['search'])) {
+              $query .= "where title = " . $_POST['search'];
+            }
+            $inventory = $dbh->query($query);
             $inventory->setFetchMode(PDO::FETCH_ASSOC);
     
             while($row = $inventory->fetch()) {
@@ -79,6 +83,7 @@
 						</td>
 				</tr>
 			</table>
+      <input type="Submit" value="Search" />
 		</form>
 	</div>
 	<?php include "includes/footer.inc.php" ?>
