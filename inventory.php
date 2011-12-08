@@ -21,7 +21,7 @@
 	
 		<h2>Book Inventory</h2>
 		
-		<table border = "1" class="sortable" id="blah">
+		<table border = "1" class="sortable" id="inventoryTable">
 		    <th>Title</th>
         <th>Author</th>
         <th>ISBN</th>
