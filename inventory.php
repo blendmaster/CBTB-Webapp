@@ -93,7 +93,7 @@
           </td>
           <td>
             <select name="please" id="please">
-            	<option value="title">Title</option>
+            	<option value='title'>Title</option>
             </select>
           </td>
         </tr>
