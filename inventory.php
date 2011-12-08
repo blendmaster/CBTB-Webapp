@@ -30,11 +30,12 @@
         if($dbh = open_db()) {
           try{
             $query = 'select title, author, ISBN, donation_id from books';
-            $query .= " order by " . $_POST['sort'];
             if(isset($_POST['search'])) {
               $query .= " where " . $_POST['criteria'] . " like '%" . $_POST['search'] . "%'";
             }
-
+            if($_POST['filter']!= "") {
+              $query .= " where author = '" . $_POST['filter'] . "'";
+            }
             
             $inventory = $dbh->query($query);
             $inventory->setFetchMode(PDO::FETCH_ASSOC);
