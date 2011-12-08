@@ -33,10 +33,10 @@
             if(isset($_POST['search'])) {
               $query .= " where " . $_POST['criteria'] . " like '%" . $_POST['search'] . "%'";
             }
-            if(isset($_POST['search']) && ($_POST['filter'] != "---")) $query .= " and";
-            if(!isset($_POST['search']) && ($_POST['filter'] != "---")) $query .= " where";
-            if($_POST['filter'] != "---") {
-              $query .= " author = '" . $_POST['filter'] . "'";
+            if(isset($_POST['search']) && ($_POST['daFilter'] != "---")) $query .= " and";
+            if(!isset($_POST['search']) && ($_POST['daFilter'] != "---")) $query .= " where";
+            if($_POST['daFilter'] != "---") {
+              $query .= " author = '" . $_POST['daFilter'] . "'";
             }
             echo $query;
             echo $$_POST['filter'];
@@ -84,10 +84,10 @@
 			<table>
         <tr>
           <td>
-            <label for="filter">Filter by Author:&nbsp;</label>
+            <label for="daFilter">Filter by Author:&nbsp;</label>
           </td>
           <td>
-            <select name="filter" id="filter">
+            <select name="daFilter" id="daFilter">
               <option value="---">---</option>
               <?php 
                 if( $dbh = open_db() ) {
