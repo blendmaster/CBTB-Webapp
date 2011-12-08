@@ -30,7 +30,7 @@
         if($dbh = open_db()) {
           try{
             $query = 'select title, author, ISBN, donation_id from books';
-            $query .= " order by " . $_POST['sort'] . "ASC";
+            $query .= " ORDER BY " . $_POST['sort'] . " ASC";
             if(isset($_POST['search'])) {
               $query .= " where " . $_POST['criteria'] . " like '%" . $_POST['search'] . "%'";
             }
