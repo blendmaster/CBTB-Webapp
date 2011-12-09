@@ -41,7 +41,6 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
 	<?php include "includes/headmatter.inc.php" ?>
-    <script src='js/libs/jquery.dataTables.min.js'></script>
 	<script src='js/booksearch.js'></script>
 	<title>Compassion by the Book -- Add Book</title>
 	<meta name="description" content="">
