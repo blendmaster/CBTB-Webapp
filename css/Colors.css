@@ -1,0 +1,32 @@
+/* Starting with the background color */
+body {
+	background: #597D25;
+	font-family: Arial;
+	font-size: 14px; 
+}
+
+#Menu {
+	position: absolute;
+	border-width: thick;
+	padding: 20px;
+	top: 60px;
+	right: 200px;
+	border-style: groove;
+	background: #71B771;
+}
+
+#container{
+	background: #99CC99;
+	border-width: medium;
+	top: 25px;
+	right: 300px;
+	left: 50px;
+	bottom: 100px;
+	border-style: double;
+	padding-left: 50px;
+	margin-top:25px;
+	margin-bottom:100px;
+	margin-right:50px;
+	margin-left:50px;
+	
+}

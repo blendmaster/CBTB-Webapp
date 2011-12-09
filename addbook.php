@@ -1,3 +1,4 @@
+<?php ob_start(); ?>
 <?php require "includes/loggedin.inc.php" ?>
 <?php 
   require_once "includes/db.inc.php";
@@ -6,8 +7,8 @@
   if( count($_POST) > 0 ) {
 	  if( !isset($_POST['title']) ) {
 		  $error = "Please enter a book title";
-	  } elseif( !isset($_POST['author']) || !preg_match( '/^[a-zA-Z]+\s[a-zA-z]+$/', $_POST['author'] ) ) {
-		  $error = "The author name must be first and last and cannot contain special characters";
+	  } elseif( !isset($_POST['author']) ) {
+		  $error = "Please enter the book's author.";
 	  } elseif( !isset($_POST['ISBN']) || strlen( $_POST['ISBN'] ) < 10 || strlen( $_POST['ISBN'] ) > 13) {
 		  $error = "Please enter a valid ISBN";
 	  } elseif ($dbh = open_db() ) {
@@ -25,6 +26,7 @@
                     ":price" => $price));
 			
 			  $book_added = true;
+              header("Location: http://{$_SERVER['SERVER_NAME']}/team13/inventory.php"); 
 		  } catch (PDOException $e) {
 			  $error = "Book was not added: " . $e->getMessage();
 		  }
@@ -52,14 +54,17 @@
 	<?php include "includes/header.inc.php" ?>
 	<div id="main" role="main">
 		<div id='search'>
-			<p>Add a book using Google Book search:</p>
+			<p>Add a book using Google Book search (Select the book to automatically fill out the form fields):</p>
 			<form id='search-form'>
 				<input type='search' name='q' id='search-query' placeholder="Title, Author, ISBN, etc" />
+                <input type='hidden' name='printType' value='books' />
 				<input type='submit' value='Search' id='search-button' />
 			</form>
-			<ul id='search-results'></ul>
+			<div id='search-results'></div>
 		</div>
-		<form action='addbook.php' method='post'>
+		<form action='addbook.php' method='post' id='add-book-form'>
+            <a name='form'></a>
+            <p>Fill out the book information manually:</p>
 			<fieldset>
 				<legend>Book Description</legend>
 				<table>							

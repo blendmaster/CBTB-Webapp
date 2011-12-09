@@ -7,9 +7,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
 	<?php include "includes/headmatter.inc.php" ?>
-	<script type="text/javascript" src="js/libs/jquery-1.6.2.min.js.js"></script> 
-	<script type="text/javascript" src="js/libs/jquery.tablesorter.js"></script> 
-	<script type="text/javascript" src="js/inventorySort.js"></script>
+    <script src='js/inventory.js'></script>
 	<title>Compassion by the Book</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -19,127 +17,30 @@
 <div id="container">
 	<?php include "includes/header.inc.php"; ?>
 	<div id="main" role="main">
-	
-		<h2>Book Inventory</h2>
-		
-		<table border = "1" class="tablesorter" id="inventoryTable">
-		<th>Title</th>	<th>Author</th>	<th>ISBN</th>	<th>Donor</th>	<td>Location</th>
-		  <?php 
-		    $error = false;
-			if( !isset($_POST['order']) ) {
-				$order = 'title';
-			} else {
-				$order = $_POST['order'];
-			}
-        if($dbh = open_db()) {
-          try{
-            $query = 'select title, author, ISBN, donation_id from books';
-            
-            if(isset($_POST['search'])) {
-              $query .= " where " . $_POST['criteria'] . " like '%" . $_POST['search'] . "%'";
-            }
-            if(isset($_POST['search']) && ($_POST['daFilter'] != "none") && isset($_POST['daFilter'])) $query .= " and";
-            if(!isset($_POST['search']) && ($_POST['daFilter'] != "none") && isset($_POST['daFilter'])) $query .= " where";
-            if(($_POST['daFilter'] != "none" && isset($_POST['daFilter']))) {
-              $query .= " author = '" . $_POST['daFilter'] . "'";
-            }
-            if(!isset($_POST['order'])) {
-              $order = 'title';
-            } else {
-              $order = $_POST['order'];
-            }
-            $query .= " ORDER BY " . $order;
-
-            
-            $inventory = $dbh->query($query);
-            $inventory->setFetchMode(PDO::FETCH_ASSOC);
-    
-            while($row = $inventory->fetch()) {
-              ?>
+        <h2>Book Inventory</h2>
+        <p id='nojs'>This page requires Javascript to be enabled. Don't worry, we're not evil.</p>
+	    <!-- relying on javascript to fetch the data with json -->	
+        <table class='display' id='books'>
+            <thead>
                 <tr>
-                  <td><?php echo $row['title'];?></td>
-                  <td><?php echo $row['author'];?></td>
-                  <td><?php echo $row['ISBN'];?></td>
-                  <?php
-                    try{
-                      $query = 'select donor, location from donations where id = ' . $row['donation_id'];
-                      $donation = $dbh->query($query);
-                      $donation -> setFetchMode(PDO::FETCH_ASSOC);
-                      $theDonation = $donation->fetch();
-                    } catch (PDOException $e) {
-                      $error = 'Connection failed: ' . $e->getMessage();
-                    }
-                    if($error) {
-                      echo '<td>' . $error . '</td><td></td>';
-                    } else {
-                      ?>
-                      <td><?php echo $theDonation['donor'];?></td>
-                      <td><?php echo $theDonation['location'];?></td>
-                      <?php
-                    }
-                  ?>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Price</th>
+                    <th>Donor</th>
+                    <th>Location</th>
                 </tr>
-              <?php
-            }
-          } catch (PDOException $e) {
-            $error = 'Connection failed: ' . $e->getMessage();
-          }	
-        } else {
-          $error = "Error connecting to db";
-        }
-        if($error) echo $error;
-      ?>
-		</table>
-		<form action='inventory.php' method='post'>
-			<table>
-        <tr>
-          <td>
-            <label for="order">Order By:&nbsp;</label>
-          </td>
-          <td>
-            <select name="order" id="order">
-            	<option value='title'>Title</option>
-              <option value='author'>Author</option>
-              <option value='ISBN'>ISBN</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label for="daFilter">Filter by Author:&nbsp;</label>
-          </td>
-          <td>
-            <select name="daFilter" id="daFilter">
-              <option value="none">---</option>
-              <?php 
-                if( $dbh = open_db() ) {
-                  $authors = $dbh->query('select * from books');
-                  while( $author = $authors->fetch() ) {
-                    echo '<option value="' . $author['author'] . '">' . $author['author'] . '</option>';
-                  }
-                }
-              ?>
-            </select>
-          </td>
-        </tr>
-				<tr>
-					<td>
-            <label for="search">Search:&nbsp;</label>
-          </td>
-          <td>
-            <input type="search" name="search" id="search" placeholder='Search Term' maxlength='255' <?php if( isset($_POST['search']) ) { printf( "value='%s'", $_POST['search']); } ?>/>
-          </td>
-          <td>
-            <select name="criteria" id="criteria">
-              <option value='title'>Title</option>
-              <option value='author'>Author</option>
-              <option value='ISBN'>ISBN</option>
-            </select>
-          </td>
-        </tr>
-			</table>
-      <input type="Submit" value="Apply" />
-		</form>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
 	</div>
 	<?php include "includes/footer.inc.php" ?>
 </div> <!--! end of #container -->
