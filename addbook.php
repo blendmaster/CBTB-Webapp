@@ -41,6 +41,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
 	<?php include "includes/headmatter.inc.php" ?>
+    <script src='js/libs/jquery.dataTables.min.js'></script>
 	<script src='js/booksearch.js'></script>
 	<title>Compassion by the Book -- Add Book</title>
 	<meta name="description" content="">
@@ -55,11 +56,13 @@
 			<p>Add a book using Google Book search:</p>
 			<form id='search-form'>
 				<input type='search' name='q' id='search-query' placeholder="Title, Author, ISBN, etc" />
+                <input type='hidden' name='printType' value='books' />
 				<input type='submit' value='Search' id='search-button' />
 			</form>
-			<ul id='search-results'></ul>
+			<div id='search-results'></div>
 		</div>
-		<form action='addbook.php' method='post'>
+		<form action='addbook.php' method='post' id='add-book-form'>
+            <a name='form'></a>
 			<fieldset>
 				<legend>Book Description</legend>
 				<table>							

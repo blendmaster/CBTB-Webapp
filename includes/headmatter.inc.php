@@ -3,8 +3,10 @@
 
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 
+    <link rel="stylesheet" href="css/datatables.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/formalize.css">
 	
 	<script src="js/libs/modernizr-2.0.6.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
