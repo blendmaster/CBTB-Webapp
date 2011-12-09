@@ -7,6 +7,7 @@
 	</header>
 	<nav>
 		<ul>
+		<div id = "Menu">
 			<?php if( logged_in() ): ?>
 				<li><a href="dashboard.php">User Dashboard</a></li>
 				<li><a href="useradmin.php">User Priveleges Management</a></li>
@@ -25,5 +26,6 @@
 				</li>
 				<li><a href="register.php">Register</a></li>
 			<?php endif; ?>
+		</div>
 		</ul>
 	</nav>
