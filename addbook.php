@@ -41,6 +41,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
 	<?php include "includes/headmatter.inc.php" ?>
+	<script src='js/booksearch.js'></script>
 	<title>Compassion by the Book -- Add Book</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -50,6 +51,14 @@
 <div id="container">
 	<?php include "includes/header.inc.php" ?>
 	<div id="main" role="main">
+		<div id='search'>
+			<p>Add a book using Google Book search:</p>
+			<form id='search-form'>
+				<input type='search' name='q' id='search-query' placeholder="Title, Author, ISBN, etc" />
+				<input type='submit' value='Search' id='search-button' />
+			</form>
+			<ul id='search-results'></ul>
+		</div>
 		<form action='addbook.php' method='post'>
 			<fieldset>
 				<legend>Book Description</legend>

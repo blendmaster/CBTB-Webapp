@@ -7,4 +7,4 @@
 	<link rel="stylesheet" href="css/formalize.css">
 	
 	<script src="js/libs/modernizr-2.0.6.min.js"></script>
-	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
